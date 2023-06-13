@@ -1,4 +1,4 @@
-# Project name: canker_detect
+# Citrus Canker Detection
 
 Canker disease detection using deep learning Model Inception V3.
 
