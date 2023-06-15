@@ -20,7 +20,9 @@ To run the project in your Windows PC
  4) Go to pubsec.yaml file and run 'flutter pub get" command.
  5) Connect a Physical or Virtual Device and run command "flutter run"
 
-[YOU CAN FIND LATEST APK IN RELEASES ON LEFT}
+[YOU CAN FIND LATEST APK IN RELEASES ON LEFT]
+
+
 **Some screenshots**
 ![Multi-Lingual](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/e1de6fdd-456c-499d-b85c-20282b1f3d10)
 ![model_Integration](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/67a50a34-aec5-46e6-a21f-316d1f275e4e)
