@@ -23,7 +23,7 @@ To run the project in your Windows PC
 **Some screenshots**
 ![Multi-Lingual](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/e1de6fdd-456c-499d-b85c-20282b1f3d10)
 ![model_Integration](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/67a50a34-aec5-46e6-a21f-316d1f275e4e)
-![weather](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/4277fd5e-d147-4236-aaa4-0822e506cd97)
+![weather](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/28b912af-4d78-47b1-90db-3de61608f023)
 
 
 If you face any errors. Feel free to contact me at souravmalani95@gmail.com or i190434@nu.edu.pk
