@@ -1,3 +1,0 @@
-0 CitrusHealthy
-1 CitrusInitial
-2 CitrusFinal
