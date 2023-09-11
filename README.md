@@ -5,10 +5,6 @@ Canker disease detection using deep learning Model Inception V3.
 Version of dart-sdk I used to make this project
   : Dart SDK version: 3.0.3 (stable) (Wed May 31 15:35:05 2023 +0000) on "windows_x64"
 
-**Folders Included: **
-   lib (folder)
-   assets (folder) 
-   pubsec.yaml (file)
 
 
 **How to run**
@@ -20,7 +16,7 @@ To run the project in your Windows PC
  4) Go to pubsec.yaml file and run 'flutter pub get" command.
  5) Connect a Physical or Virtual Device and run command "flutter run"
 
-[YOU CAN FIND LATEST APK IN RELEASES ON LEFT]
+[YOU CAN FIND LATEST APK IN RELEASES ON Right]
 
 
 **Some screenshots**
