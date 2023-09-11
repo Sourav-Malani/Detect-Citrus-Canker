@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "251096605926",
+    "project_id": "canker-detect",
+    "storage_bucket": "canker-detect.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:251096605926:android:7fbb0266eddebbb5034727",
+        "android_client_info": {
+          "package_name": "com.example.canker_detect"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "251096605926-a3u6cjniduarkagt7tc3rjh0oikjn4st.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.canker_detect",
+            "certificate_hash": "29f9fc43bb8bfb70b00dbab4d2d2ee1352382523"
+          }
+        },
+        {
+          "client_id": "251096605926-0unrr4hduk91lolkopkgrtant5h1son8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6uYKUfEldpn3ep6fKvc-tlb-AmqoYIjs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "251096605926-0unrr4hduk91lolkopkgrtant5h1son8.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "251096605926-vs0l4fjmei9kig3gs8r0et4tv0ilsqbk.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.cankerDetect"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
