@@ -146,6 +146,7 @@ class Classifier {
       final category = ClassifierCategory(key, value);
       categoryList.add(category);
       debugPrint('label: ${category.label}, score: ${category.score}');
+
     });
 
     // #4

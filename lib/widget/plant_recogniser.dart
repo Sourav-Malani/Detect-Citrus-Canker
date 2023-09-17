@@ -205,7 +205,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
       children: [
         Text(title, style: kResultTextStyle),
         const SizedBox(height: 10),
-        Text(accuracyLabel, style: kResultRatingTextStyle)
+        Text(accuracyLabel, style: kResultRatingTextStyle),
+        Text("Hi")
       ],
     );
   }

@@ -72,6 +72,7 @@ dependencies:
   uuid: ^4.0.0
   firebase_storage: ^11.2.6
   geolocator: ^10.0.1
+  quickalert: ^1.0.2
   #new added
 
 

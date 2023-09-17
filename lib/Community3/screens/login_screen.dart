@@ -9,7 +9,7 @@ import 'package:canker_detect/Community3/widgets/text_field_input.dart';
 import '../responsive/mobilescreenlayout.dart';
 import '../responsive/responsive_layout_screen.dart';
 import '../responsive/webscreenlayout.dart';
-
+import 'package:quickalert/quickalert.dart';
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -40,7 +40,13 @@ class _LoginScreenState extends State<LoginScreen> {
               mobilescreenlayout: MobileScreenLayout(),
               webscreenlayout: WebScreenLayout())));
     } else {
-      showSnackBar(res, context);
+      //showSnackBar(res, context);
+      QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: 'Oops...',
+        text: res,
+      );
     }
     setState(() {
       isloading = false;
