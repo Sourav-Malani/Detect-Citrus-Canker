@@ -24,13 +24,14 @@ class SwitchLanguageScreen extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Switch Language',
-                style: TextStyle(fontSize: 40),
+                style: TextStyle(fontSize: 40, color: Colors.black),
               ),
               SizedBox(height: 24),
               Text(
                 'home_description'.tr(),
                 style: TextStyle(
                   fontSize: 24,
+                  color: Colors.black
                 ),
               ),
               SizedBox(height: 24),

@@ -74,8 +74,8 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
               begin: FractionalOffset(0.0, 0.0),
               end: FractionalOffset(1.0, 1.0),
               colors: <Color>[
-                Color(0xFF4BA198),
-                Color(0xFF4BA198),
+                Colors.green,
+                Colors.green,
               ],
               stops: <double>[0.0, 1.0],
               tileMode: TileMode.clamp,
@@ -206,7 +206,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     if (title == 'Detect Canker') {
       route = "/CankerDetect";
     } else if (title == 'Check Weather') {
-      route = "/weatherPage";
+      route = "/NewWeather";
     } else if (title == 'Community') {
       route = "/feedScreen";
     }

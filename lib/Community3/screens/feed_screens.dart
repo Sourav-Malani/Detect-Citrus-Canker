@@ -13,13 +13,7 @@ class FeedScreen extends StatelessWidget {
           return false; // Prevent default back button behavior
         },
         child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: mobileBackgroundColor,
-            title: Text("Community"),
-            actions: [
-              IconButton(onPressed: () {}, icon: Icon(Icons.messenger_outline))
-            ],
-          ),
+          appBar: AppBar(title: Text("Community"), backgroundColor: Colors.green,),
           body: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection("post")

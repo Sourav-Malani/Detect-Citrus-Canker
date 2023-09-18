@@ -10,6 +10,8 @@ import '../responsive/mobilescreenlayout.dart';
 import '../responsive/responsive_layout_screen.dart';
 import '../responsive/webscreenlayout.dart';
 import 'package:quickalert/quickalert.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -31,27 +33,62 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       isloading = true;
     });
-    String res = await AuthMethods().loginUser(
-        email: _emailController.text, password: _passwordController.text);
+
+    String email = _emailController.text;
+    String password = _passwordController.text;
+
+    // Check if the internet is available
+    bool isInternetAvailable = await checkInternetConnectivity();
+    if (!isInternetAvailable) {
+      QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: 'No Internet',
+        text: 'Please check your internet connection.',
+      );
+      setState(() {
+        isloading = false;
+      });
+      return;
+    }
+
+    String res = await AuthMethods().loginUser(email: email, password: password);
+
     if (res == "success") {
-      //
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => ResponsiveLayout(
-              mobilescreenlayout: MobileScreenLayout(),
-              webscreenlayout: WebScreenLayout())));
-    } else {
-      //showSnackBar(res, context);
+        builder: (context) => ResponsiveLayout(
+          mobilescreenlayout: MobileScreenLayout(),
+          webscreenlayout: WebScreenLayout(),
+        ),
+      ));
+    } else if (res == "incorrect_password_or_email") {
       QuickAlert.show(
         context: context,
         type: QuickAlertType.error,
         title: 'Oops...',
-        text: res,
+        text: 'Incorrect email or password. Please try again.',
+      );
+    } else {
+      // Handle other possible errors here
+      QuickAlert.show(
+        context: context,
+        type: QuickAlertType.error,
+        title: 'Oops...',
+        text: "Password Invalid",
       );
     }
     setState(() {
       isloading = false;
     });
   }
+
+
+  Future<bool> checkInternetConnectivity() async {
+    final ConnectivityResult connectivityResult =
+    await Connectivity().checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
+  }
+
 
   void navigatetosignup() {
     Navigator.of(context).push(MaterialPageRoute(
@@ -62,6 +99,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Login")),
       body: SafeArea(
           child: Container(
         padding: EdgeInsets.symmetric(horizontal: 32),
