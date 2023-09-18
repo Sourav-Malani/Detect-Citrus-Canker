@@ -13,14 +13,14 @@ class AppFooter extends StatelessWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Text("Mobile Application Development 2 - Midterm Project ",
+          Text("Weather Information",
               style: Theme.of(context).textTheme.overline),
           Text(
-            "Martin Erickson Lapetaje | BSCS - 3",
+            "FYP",
             style: Theme.of(context).textTheme.overline,
           ),
           Text(
-            "© Panahon 2022",
+            "© CankerDetect 2023",
             style: Theme.of(context).textTheme.overline,
           ),
           // Text()

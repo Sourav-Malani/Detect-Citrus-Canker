@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:canker_detect/utils/colors.dart';
 import 'package:canker_detect/Community3/widgets/post_card.dart';
 
 class FeedScreen extends StatelessWidget {

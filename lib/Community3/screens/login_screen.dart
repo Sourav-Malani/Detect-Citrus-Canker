@@ -3,7 +3,6 @@ import 'package:canker_detect/Community3/resources/auth_methods.dart';
 //import 'package:canker_detect/Community3/screens/homescreen.dart';
 import 'package:canker_detect/Community3/screens/signupscreen.dart';
 import 'package:canker_detect/utils/colors.dart';
-import 'package:canker_detect/utils/utils.dart';
 import 'package:canker_detect/Community3/widgets/text_field_input.dart';
 
 import '../responsive/mobilescreenlayout.dart';
