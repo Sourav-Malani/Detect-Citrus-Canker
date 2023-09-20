@@ -29,7 +29,7 @@ class _CommentSectionState extends State<CommentSection> {
 
   @override
   Widget build(BuildContext context) {
-    final User user = Provider.of<UserProvider>(context).getUser;
+    final User? user = Provider.of<UserProvider>(context).getUser;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -62,7 +62,7 @@ class _CommentSectionState extends State<CommentSection> {
           padding: const EdgeInsets.only(left: 16, right: 8),
           child: Row(children: [
             CircleAvatar(
-                radius: 18, backgroundImage: NetworkImage(user.photoUrl)),
+                radius: 18, backgroundImage: NetworkImage(user!.photoUrl)),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(left: 16, right: 8),

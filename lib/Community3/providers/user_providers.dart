@@ -5,16 +5,15 @@ import 'package:canker_detect/Community3/resources/user.dart';
 class UserProvider with ChangeNotifier {
   final AuthMethods _authMethods = AuthMethods();
   User? _user;
-  User get getUser => _user!;
-  //User? get getUser => _user;
+  User? get getUser => _user;
 
   Future<void> refreshUser() async {
     User user = await _authMethods.getUserDetails();
-    //_user = user;
-    _user ??= user;
+    _user = user;
     notifyListeners();
   }
 }
+
 
 //Modified.
 // class UserProvider with ChangeNotifier {

@@ -52,7 +52,7 @@ class _PostCardState extends State<PostCard> {
 
   @override
   Widget build(BuildContext context) {
-    final User user = Provider.of<UserProvider>(context).getUser;
+    final User? user = Provider.of<UserProvider>(context).getUser;
     return Container(
       color: mobileBackgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -116,7 +116,7 @@ class _PostCardState extends State<PostCard> {
           GestureDetector(
 
             onDoubleTap: () async{
-              await FirestoreMethod().likePost(widget.snap["postId"],user.uid,widget.snap["likes"]);
+              await FirestoreMethod().likePost(widget.snap["postId"],user!.uid,widget.snap["likes"]);
               setState(() {
                 isLikeAnimating = true;
               });
@@ -155,14 +155,14 @@ class _PostCardState extends State<PostCard> {
           Row(
             children: [
               LikeAnimation(
-                isAnimating: widget.snap["likes"].contains(user.username),
+                isAnimating: widget.snap["likes"].contains(user?.username),
                 smallLike: true,
                 child: IconButton(
                     onPressed: () async {
-                      await FirestoreMethod().likePost(widget.snap["postId"],user.uid,widget.snap["likes"]);
+                      await FirestoreMethod().likePost(widget.snap["postId"],user!.uid,widget.snap["likes"]);
 
                     },
-                    icon: widget.snap['likes'].contains(user.uid)?const Icon(Icons.favorite,color:Colors.red):
+                    icon: widget.snap['likes'].contains(user?.uid)?const Icon(Icons.favorite,color:Colors.red):
                     const Icon(Icons.favorite_border)
                 ),
               ),

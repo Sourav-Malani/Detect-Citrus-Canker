@@ -15,8 +15,12 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         Duration(seconds: 3),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => SwitchLanguageScreen())));
+            () {
+          if (mounted) {
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SwitchLanguageScreen()));
+          }
+        }
+    );
   }
 
   @override

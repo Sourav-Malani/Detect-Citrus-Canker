@@ -17,7 +17,7 @@ class _CommentCardState extends State<CommentCard> {
   @override
   Widget build(BuildContext context) {
     // ignore: unused_local_variable
-    final User user = Provider.of<UserProvider>(context).getUser;
+    final User? user = Provider.of<UserProvider>(context).getUser;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 18),
       child: Row(children: [
