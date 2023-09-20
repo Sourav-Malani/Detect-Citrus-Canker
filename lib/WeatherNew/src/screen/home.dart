@@ -39,13 +39,7 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () async {
-          // Navigate back to the home screen when the back button is pressed
-          Navigator.pushReplacementNamed(context, '/mobileScreenLayout');
-          return false; // Prevent default back button behavior
-        },
-    child: SafeArea(
+    return SafeArea(
       child: Stack(
         children: [
           Image(
@@ -65,19 +59,18 @@ class _HomeState extends State<Home> {
                     color: Theme.of(context).primaryColor,
                   ),
                   onPressed: () {
+                    citySearch();
                   },
                 ),
               ],
               backgroundColor: Colors.transparent,
               elevation: 0.0,
               flexibleSpace: FlexibleSpaceBar(
-                expandedTitleScale: 1,
-                titlePadding: EdgeInsets.all(1),
-
+                expandedTitleScale: 1.6,
+                titlePadding: EdgeInsets.all(18),
                 title: Text(
                   'Weather Page',
                   style: Theme.of(context).textTheme.headline5,
-
                 ),
               ),
             ),
@@ -117,7 +110,7 @@ class _HomeState extends State<Home> {
           ),
         ],
       ),
-    ),);
+    );
   }
 
   SizedBox messageBox(BuildContext context, String title, String subtitle) {
