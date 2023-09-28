@@ -1,5 +1,3 @@
-Here's the improved formatting for your content:
-
 # Citrus Canker Detection
 
 Canker disease detection using the deep learning model Inception V3.
