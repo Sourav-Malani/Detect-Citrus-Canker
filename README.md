@@ -27,7 +27,6 @@ flutter pub get
 flutter run
 ```
 
-**You can find the latest APK in the 'Releases' on the right.**
 
 ## Screenshots
 ![Multi-Lingual](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/e1de6fdd-456c-499d-b85c-20282b1f3d10)
