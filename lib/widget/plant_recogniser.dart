@@ -7,8 +7,8 @@ import '../classifier/classifier.dart';
 import '../styles.dart';
 import 'plant_photo_view.dart';
 
-const _labelsFileName = 'assets/labels.txt';
-const _modelFileName = 'model_unquant.tflite';
+const _labelsFileName = 'assets/labels_one.txt';
+const _modelFileName = 'model_unquant_one.tflite';
 
 class PlantRecogniser extends StatefulWidget {
   const PlantRecogniser({super.key});
@@ -57,8 +57,14 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+
+    return Scaffold(
+        appBar: AppBar(
+        title: Text("Detect Canker"),
+        backgroundColor: Colors.green,
+    ),
+    body: WillPopScope(
+        onWillPop: () async {
         // Navigate back to the home screen when the back button is pressed
         Navigator.pushReplacementNamed(context, '/mobileScreenLayout');
         return false; // Prevent default back button behavior
@@ -91,14 +97,17 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
           ],
         ),
       ),
-    );
+    ),);
   }
 
   Widget _buildPhotolView() {
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
-        PlantPhotoView(file: _selectedImageFile),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(15), // Adjust the radius as needed
+          child: PlantPhotoView(file: _selectedImageFile),
+        ),
         _buildAnalyzingText(),
       ],
     );
@@ -190,7 +199,11 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     if (_resultStatus == _ResultStatus.notFound) {
       title = 'Fail to recognise';
     } else if (_resultStatus == _ResultStatus.found) {
-      title = _plantLabel;
+      if(_resultStatus.toString()=='Others') { //Not Citrus
+        title = "Fail To Recognize";
+      } else{
+        title = _plantLabel;
+      }
     } else {
       title = '';
     }
@@ -204,9 +217,9 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     return Column(
       children: [
         Text(title, style: kResultTextStyle),
-        const SizedBox(height: 10),
-        Text(accuracyLabel, style: kResultRatingTextStyle),
-        Text("Hi")
+        SizedBox(height: 10),
+        if (title != 'Fail To Recognize')
+          Text(accuracyLabel, style: kResultRatingTextStyle),
       ],
     );
   }

@@ -204,7 +204,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   ) {
     String route = '';
     if (title == 'Detect Canker') {
-      route = "/CankerDetect";
+      route = "/PlantRecogniser";
     } else if (title == 'Check Weather') {
       route = "/NewWeather";
     } else if (title == 'Community') {

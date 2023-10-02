@@ -86,6 +86,7 @@ class MyApp extends StatelessWidget {
 import 'package:canker_detect/Community3/screens/feed_screens.dart';
 import 'package:canker_detect/Community3/screens/homescreen.dart';
 import 'package:canker_detect/WeatherPage.dart';
+import 'package:canker_detect/widget/plant_recogniser.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:canker_detect/Languages.dart';
@@ -169,6 +170,7 @@ class CustomMaterialApp extends StatelessWidget {
               '/weatherPage': (context) => WeatherPage(),
               '/feedScreen': (context) => FeedScreen(),
               '/mobileScreenLayout': (context) => MobileScreenLayout(),
+              '/PlantRecogniser':(context) => PlantRecogniser(),
 //              '/MapScreen': (context) => GoolgeMapStyling(),
               "/NewWeather": (context) => Home(themeController),
               // Define more routes as needed
