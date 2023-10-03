@@ -1,3 +1,4 @@
+import 'package:canker_detect/Community3/screens/forgot_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:canker_detect/Community3/resources/auth_methods.dart';
 //import 'package:canker_detect/Community3/screens/homescreen.dart';
@@ -94,6 +95,11 @@ class _LoginScreenState extends State<LoginScreen> {
       builder: (context) => SignUpScreen(),
     ));
   }
+  void navigatetoForgot() {
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => ForgotPasswordScreen(),
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +171,32 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                 ),
               ],
+            ),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: const Text("Forgot Password?"),
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                ),
+                const SizedBox(
+                  width: 12,
+                ),
+                GestureDetector(
+                  onTap: navigatetoForgot,
+                  child: Container(
+                    child: const Text(
+                      "Reset here",
+                      style:
+                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 8),
+                  ),
+                ),
+              ],
             )
+
           ],
         ),
       )),

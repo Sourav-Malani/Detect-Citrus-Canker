@@ -9,6 +9,24 @@ class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+  // Forgot Password
+  Future<String> forgotPassword({required String email}) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return "success";
+    } on FirebaseAuthException catch (err) {
+      if (err.code == "invalid-email") {
+        return "The email is badly formatted";
+      } else if (err.code == "user-not-found") {
+        return "No user found with this email";
+      } else {
+        return "An error occurred. Please try again later.";
+      }
+    } catch (err) {
+      return "An error occurred. Please try again later.";
+    }
+  }
+
   Future<model.User> getUserDetails() async {
     User currentUser = _auth.currentUser!;
 

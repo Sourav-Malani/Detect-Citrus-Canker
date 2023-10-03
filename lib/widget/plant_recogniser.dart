@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../classifier/classifier.dart';
 import '../styles.dart';
 import 'plant_photo_view.dart';
+import 'package:flutter/material.dart';
 
 const _labelsFileName = 'assets/labels_one.txt';
 const _modelFileName = 'model_unquant_one.tflite';
@@ -27,6 +28,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   bool _isAnalyzing = false;
   final picker = ImagePicker();
   File? _selectedImageFile;
+  String _recommendations = ''; // Add this variable
+
 
   // Result
   _ResultStatus _resultStatus = _ResultStatus.notStarted;
@@ -184,6 +187,23 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     final plantLabel = resultCategory.label;
     final accuracy = resultCategory.score;
 
+    // Set recommendations based on the result
+    if (result == _ResultStatus.found) {
+      if (plantLabel == 'CitrusHealthy') {
+        _recommendations = 'Your citrus plant looks healthy!';
+      } else if (plantLabel == 'CankerInitial') {
+        _recommendations = 'It seems like your citrus plant has an initial stage of canker. '
+            'Consider taking preventive measures.';
+      } else if (plantLabel == 'CankerFinal') {
+        _recommendations = 'Your citrus plant has a final stage of canker. '
+            'Immediate action is required. Consult an expert.';
+      } else {
+        _recommendations = '';
+      }
+    } else {
+      _recommendations = 'Fail to recognize the plant.';
+    }
+
     _setAnalyzing(false);
 
     setState(() {
@@ -199,9 +219,9 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     if (_resultStatus == _ResultStatus.notFound) {
       title = 'Fail to recognise';
     } else if (_resultStatus == _ResultStatus.found) {
-      if(_resultStatus.toString()=='Others') { //Not Citrus
+      if (_resultStatus.toString() == 'Others') {
         title = "Fail To Recognize";
-      } else{
+      } else {
         title = _plantLabel;
       }
     } else {
@@ -214,6 +234,18 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
       accuracyLabel = 'Probability: ${(_accuracy * 100).toStringAsFixed(2)}%';
     }
 
+    // Show recommendations as a Snackbar
+    if (_recommendations.isNotEmpty) {
+      WidgetsBinding.instance?.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(_recommendations),
+            duration: Duration(seconds: 5), // Adjust the duration as needed
+          ),
+        );
+      });
+    }
+
     return Column(
       children: [
         Text(title, style: kResultTextStyle),
@@ -223,4 +255,5 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
       ],
     );
   }
+
 }
