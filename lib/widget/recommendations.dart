@@ -53,9 +53,13 @@ class CitrusCankerRecommendationsPage extends StatelessWidget {
               ),
               SizedBox(height: 16), // Add some space before the ExpansionTile
               ExpansionTile(
-                leading: Icon("assets/icons/sickle_logo.png" as IconData?), // Replace with your logo icon
+                leading: Image.asset(
+                  "assets/icons/spray.png",
+                  width: 35, // Set the desired width
+                  height: 35,
+                ),
                 title: Text(
-                  'Additional Information', // Change this to your desired title
+                  'Initial Stage',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -65,13 +69,100 @@ class CitrusCankerRecommendationsPage extends StatelessWidget {
                 children: [
                   ListTile(
                     title: Text(
-                      'Your additional information goes here.',
+                      'Initial Stage Recommendations:',
+                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '1. Early Detection: Regularly inspect your citrus trees for any signs of citrus canker, including lesions or pustules on leaves, fruit, or stems. Early detection is key to preventing the disease from spreading.',
+                      style: TextStyle(fontSize: 16, color: textColor),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '2. Pruning: Prune and remove infected plant parts as soon as you notice them. Use clean, disinfected pruning tools to avoid spreading the bacteria further.',
+                      style: TextStyle(fontSize: 16, color: textColor),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '3. Dispose Properly: Properly dispose of the infected plant material by burning it or placing it in sealed plastic bags and sending it to a landfill.',
+                      style: TextStyle(fontSize: 16, color: textColor),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '4. Copper-based Sprays: Apply copper-based fungicides or bactericides to affected areas. These treatments can help slow down the progression of the disease.',
+                      style: TextStyle(fontSize: 16, color: textColor),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '5. Maintain Good Hygiene: Practice good hygiene when handling citrus trees. Clean your hands and tools between handling different trees to prevent cross-contamination.',
+                      style: TextStyle(fontSize: 16, color: textColor),
+                    ),
+                  ),
+                  ListTile(
+                    title: Text(
+                      '6. Isolation: Isolate infected trees from healthy ones to prevent the spread of the disease within your orchard or garden.',
                       style: TextStyle(fontSize: 16, color: textColor),
                     ),
                   ),
                 ],
               ),
-            ],
+
+          SizedBox(height: 16), // Add some space before the Final Stage ExpansionTile
+          ExpansionTile(
+            leading: Image.asset(
+              "assets/icons/sickle_logo.png",
+              width: 35, // Set the desired width
+              height: 35,
+              color: Colors.green,
+            ),
+            title: Text(
+              'Final Stage',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: textColor,
+              ),
+            ),
+            children: [
+          ListTile(
+          title: Text(
+          'Final Stage Recommendations:',
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: textColor),
+          ),
+        ),
+        ListTile(
+          title: Text(
+              '1. Quarantine: At the final stage, it''s crucial to quarantine and remove the infected citrus trees from your orchard or garden to prevent further spread.',
+              style: TextStyle(fontSize: 16, color: textColor),
+        ),
+      ),
+      ListTile(
+        title: Text(
+          '2. Disinfection: Clean and disinfect all tools and equipment used in the affected area to prevent contamination.',
+          style: TextStyle(fontSize: 16, color: textColor),
+        ),
+      ),
+      ListTile(
+        title: Text(
+          '3. Monitor Nearby Trees: Keep a close watch on nearby healthy trees for any signs of infection. Take immediate action if symptoms appear.',
+          style: TextStyle(fontSize: 16, color: textColor),
+        ),
+      ),
+      ListTile(
+        title: Text(
+          '4. Seek Expert Advice: Consider consulting with a professional agricultural extension service or horticulturist for guidance on managing the disease in its final stage.',
+          style: TextStyle(fontSize: 16, color: textColor),
+        ),
+      ),
+      ],
+    ),
+
+    ],
           ),
         ),
       ),
