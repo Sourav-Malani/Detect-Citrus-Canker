@@ -163,6 +163,7 @@ class CustomMaterialApp extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             theme: snapshot.data,
+            darkTheme: ThemeData.dark(), // Set the dark theme
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,
@@ -170,9 +171,8 @@ class CustomMaterialApp extends StatelessWidget {
               '/weatherPage': (context) => WeatherPage(),
               '/feedScreen': (context) => FeedScreen(),
               '/mobileScreenLayout': (context) => MobileScreenLayout(),
-              '/PlantRecogniser':(context) => PlantRecogniser(),
-//              '/MapScreen': (context) => GoolgeMapStyling(),
-              "/NewWeather": (context) => Home(themeController),
+              '/PlantRecogniser': (context) => PlantRecogniser(), // Include the PlantRecogniser page
+              '/NewWeather': (context) => Home(themeController),
               // Define more routes as needed
             },
             home: StreamBuilder<User?>(

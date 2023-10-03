@@ -31,9 +31,9 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
+/ios/
 
 install.bat
-
 # Symbolication related
 app.*.symbols
 

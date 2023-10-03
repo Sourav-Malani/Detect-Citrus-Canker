@@ -103,7 +103,6 @@ flutter:
     - assets/translations/en-US.json
     - assets/translations/hi-IN.json
     - assets/translations/ur-PK.json
-    - assets/icon/icon.png
     - assets/translations/
     - assets/labels.txt
     - assets/model_unquant.tflite

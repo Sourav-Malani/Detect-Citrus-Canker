@@ -5,7 +5,7 @@ import 'package:canker_detect/Community3/resources/firestore_method.dart';
 import 'package:canker_detect/Community3/resources/user.dart';
 import 'package:canker_detect/Community3/screens/commentScreen.dart';
 import 'package:canker_detect/utils/colors.dart';
-//import 'package:canker_detect/utils/utils.dart';
+import 'package:canker_detect/utils/utils.dart';
 import 'package:canker_detect/Community3/widgets/the_animation.dart';
 import 'package:provider/provider.dart';
 
@@ -53,6 +53,7 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     final User? user = Provider.of<UserProvider>(context).getUser;
+
     return Container(
       color: mobileBackgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -82,33 +83,53 @@ class _PostCardState extends State<PostCard> {
                   ),
                 ),
                 IconButton(
-                    onPressed: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) => Dialog(
-                            child: ListView(
-                              padding:
-                              const EdgeInsets.symmetric(vertical: 16),
-                              shrinkWrap: true,
-                              children: ["Delete"]
-                                  .map((e) => InkWell(
-                                  onTap: () async{
+                  onPressed: () {
+                    // Check if the current user is the owner of the post
 
+                    if (widget.snap["username"] == user?.username) {
+                      showDialog(
+                        context: context,
+                        builder: (context) => Dialog(
+                          child: ListView(
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            shrinkWrap: true,
+                            children: ["Delete"]
+                                .map(
+                                  (e) => InkWell(
+                                onTap: () async {
+                                  // Check again if the current user is the owner before deleting
+                                  if (widget.snap["username"] == user?.username) {
                                     FirestoreMethod().deletePost(widget.snap["postId"]);
                                     Navigator.of(context).pop();
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text("You can only delete your own posts."),
+                                      ),
+                                    );
                                   }
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                                  child: Text(e),
+                                ),
+                              ),
+                            )
+                                .toList(),
+                          ),
+                        ),
+                      );
+                    } else {
+                      // Display an error message indicating that the user can't delete this post.
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("You can only delete your own posts."),
+                        ),
+                      );
+                    }
+                  },
+                  icon: const Icon(Icons.delete),)
 
-                                  ,
-                                  child: Container(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 12, horizontal: 16),
-                                    child: Text(e),
-                                  )))
-                                  .toList(),
-                            ),
-                          ));
-                    },
-                    icon: const Icon(Icons.more_vert))
               ],
             ),
           ),
@@ -168,13 +189,8 @@ class _PostCardState extends State<PostCard> {
               ),
               IconButton(
                   onPressed: ()=> Navigator.push(context, MaterialPageRoute(builder: (context) => CommentSection(snap: widget.snap),)), icon: const Icon(Icons.comment_outlined)),
-              IconButton(onPressed: () {}, icon: const Icon(Icons.send)),
-              Expanded(
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.bookmark_border)),
-                  )),
+
+
             ],
           ),
           Container(

@@ -1,18 +1,17 @@
 import 'dart:io';
-
+import 'package:canker_detect/widget/recommendations.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import '../classifier/classifier.dart';
 import '../styles.dart';
 import 'plant_photo_view.dart';
-import 'package:flutter/material.dart';
 
 const _labelsFileName = 'assets/labels_one.txt';
 const _modelFileName = 'model_unquant_one.tflite';
 
 class PlantRecogniser extends StatefulWidget {
-  const PlantRecogniser({super.key});
+  const PlantRecogniser({Key? key}) : super(key: key);
 
   @override
   State<PlantRecogniser> createState() => _PlantRecogniserState();
@@ -28,12 +27,11 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   bool _isAnalyzing = false;
   final picker = ImagePicker();
   File? _selectedImageFile;
-  String _recommendations = ''; // Add this variable
-
+  String _recommendations = '';
 
   // Result
   _ResultStatus _resultStatus = _ResultStatus.notStarted;
-  String _plantLabel = ''; // Name of Error Message
+  String _plantLabel = '';
   double _accuracy = 0.0;
 
   late Classifier? _classifier;
@@ -47,8 +45,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   Future<void> _loadClassifier() async {
     debugPrint(
       'Start loading of Classifier with '
-      'labels at $_labelsFileName, '
-      'model at $_modelFileName',
+          'labels at $_labelsFileName, '
+          'model at $_modelFileName',
     );
 
     final classifier = await Classifier.loadWith(
@@ -60,47 +58,52 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-        appBar: AppBar(
+      appBar: AppBar(
         title: Text("Detect Canker"),
         backgroundColor: Colors.green,
-    ),
-    body: WillPopScope(
-        onWillPop: () async {
-        // Navigate back to the home screen when the back button is pressed
-        Navigator.pushReplacementNamed(context, '/mobileScreenLayout');
-        return false; // Prevent default back button behavior
-      },
-      child: Container(
-        color: kBgColor,
-        width: double.infinity,
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            const Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(top: 30),
-              child: _buildTitle(),
-            ),
-            const SizedBox(height: 20),
-            _buildPhotolView(),
-            const SizedBox(height: 10),
-            _buildResultView(),
-            const Spacer(flex: 5),
-            _buildPickPhotoButton(
-              title: 'Take a photo',
-              source: ImageSource.camera,
-            ),
-            _buildPickPhotoButton(
-              title: 'Pick from gallery',
-              source: ImageSource.gallery,
-            ),
-            const Spacer(),
-          ],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back), // Add the back button icon here
+          onPressed: () {
+            Navigator.pushReplacementNamed(context, '/mobileScreenLayout');
+          },
         ),
       ),
-    ),);
+      body: WillPopScope(
+        onWillPop: () async {
+          Navigator.pushReplacementNamed(context, '/mobileScreenLayout');
+          return false;
+        },
+        child: Container(
+          color: kBgColor,
+          width: double.infinity,
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              const Spacer(),
+              Padding(
+                padding: const EdgeInsets.only(top: 30),
+                child: _buildTitle(),
+              ),
+              const SizedBox(height: 20),
+              _buildPhotolView(),
+              const SizedBox(height: 10),
+              _buildResultView(),
+              const Spacer(flex: 5),
+              _buildPickPhotoButton(
+                title: 'Take a photo',
+                source: ImageSource.camera,
+              ),
+              _buildPickPhotoButton(
+                title: 'Pick from gallery',
+                source: ImageSource.gallery,
+              ),
+              const Spacer(),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Widget _buildPhotolView() {
@@ -108,7 +111,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
       alignment: AlignmentDirectional.center,
       children: [
         ClipRRect(
-          borderRadius: BorderRadius.circular(15), // Adjust the radius as needed
+          borderRadius: BorderRadius.circular(15),
           child: PlantPhotoView(file: _selectedImageFile),
         ),
         _buildAnalyzingText(),
@@ -142,13 +145,16 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
         height: 50,
         color: kColorBrown,
         child: Center(
-            child: Text(title,
-                style: const TextStyle(
-                  fontFamily: kButtonFont,
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.w600,
-                  color: kColorLightYellow,
-                ))),
+          child: Text(
+            title,
+            style: const TextStyle(
+              fontFamily: kButtonFont,
+              fontSize: 20.0,
+              fontWeight: FontWeight.w600,
+              color: kColorLightYellow,
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -187,15 +193,16 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     final plantLabel = resultCategory.label;
     final accuracy = resultCategory.score;
 
-    // Set recommendations based on the result
     if (result == _ResultStatus.found) {
       if (plantLabel == 'CitrusHealthy') {
         _recommendations = 'Your citrus plant looks healthy!';
       } else if (plantLabel == 'CankerInitial') {
-        _recommendations = 'It seems like your citrus plant has an initial stage of canker. '
+        _recommendations =
+        'It seems like your citrus plant has an initial stage of canker. '
             'Consider taking preventive measures.';
       } else if (plantLabel == 'CankerFinal') {
-        _recommendations = 'Your citrus plant has a final stage of canker. '
+        _recommendations =
+        'Your citrus plant has a final stage of canker. '
             'Immediate action is required. Consult an expert.';
       } else {
         _recommendations = '';
@@ -213,47 +220,52 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     });
   }
 
+  void _navigateToRecommendationsPage() {
+    // Navigate to the recommendations page
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CitrusCankerRecommendationsPage(),
+      ),
+    );  }
+
   Widget _buildResultView() {
     var title = '';
 
     if (_resultStatus == _ResultStatus.notFound) {
-      title = 'Fail to recognise';
+      title = 'Fail to recognize';
     } else if (_resultStatus == _ResultStatus.found) {
-      if (_resultStatus.toString() == 'Others') {
-        title = "Fail To Recognize";
-      } else {
-        title = _plantLabel;
-      }
+      title = _plantLabel;
     } else {
       title = '';
     }
 
-    //
     var accuracyLabel = '';
     if (_resultStatus == _ResultStatus.found) {
-      accuracyLabel = 'Probability: ${(_accuracy * 100).toStringAsFixed(2)}%';
-    }
-
-    // Show recommendations as a Snackbar
-    if (_recommendations.isNotEmpty) {
-      WidgetsBinding.instance?.addPostFrameCallback((_) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(_recommendations),
-            duration: Duration(seconds: 5), // Adjust the duration as needed
-          ),
-        );
-      });
+      accuracyLabel =
+      'Probability: ${(_accuracy * 100).toStringAsFixed(2)}%';
     }
 
     return Column(
       children: [
         Text(title, style: kResultTextStyle),
         SizedBox(height: 10),
-        if (title != 'Fail To Recognize')
+        if (title != 'Fail to recognize')
           Text(accuracyLabel, style: kResultRatingTextStyle),
+        SizedBox(height: 20),
+        if (_resultStatus == _ResultStatus.found)
+          GestureDetector(
+            onTap: _navigateToRecommendationsPage,
+            child: Container(
+              width: 200,
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                border: Border.all(color: Colors.greenAccent.withOpacity(0.7), width: 2), // Add a border with color
+              ),
+              child: Center(child: Text('Treatment')),
+            ),          ),
       ],
     );
   }
-
 }

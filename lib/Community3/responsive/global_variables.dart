@@ -1,4 +1,5 @@
 import 'package:canker_detect/Community3/screens/homescreen.dart';
+import 'package:canker_detect/widget/plant_recogniser.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:canker_detect/Community3/screens/profileScreen.dart';
@@ -12,7 +13,8 @@ var themeController = ThemeController();
 
 final homeScreenItems = [
   ProductCardWidget(),
-  SearchScreen(),
+  PlantRecogniser(),
+  //SearchScreen(),
   AddPostScreen(),
   Home(themeController),
   ProfileScreen(uid: FirebaseAuth.instance.currentUser!.uid)
