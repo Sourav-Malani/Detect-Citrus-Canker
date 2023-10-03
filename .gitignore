@@ -32,6 +32,8 @@ migrate_working_dir/
 .pub/
 /build/
 
+install.bat
+
 # Symbolication related
 app.*.symbols
 
