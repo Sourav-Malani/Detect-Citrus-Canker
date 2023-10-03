@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +9,11 @@ import 'package:canker_detect/utils/utils.dart';
 import 'package:canker_detect/Community3/widgets/follow_button.dart';
 import 'package:image_picker/image_picker.dart';
 
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
+
+
+
 class ProfileScreen extends StatefulWidget {
   final String? uid;
 
@@ -21,46 +24,46 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  Map<String, dynamic> userData = {};
+  var userData = {};
   int postLen = 0;
   int followers = 0;
   int following = 0;
   bool isfollowing = false;
   bool isLoading = false;
+  TextEditingController newUsernameController = TextEditingController();
 
   @override
   void initState() {
+    print("Current User UID: ${FirebaseAuth.instance.currentUser!.uid}");
     super.initState();
     getData();
+    newUsernameController.text = userData["username"] ?? "";
   }
 
-  Future<void> getData() async {
+  getData() async {
     setState(() {
       isLoading = true;
     });
     try {
-      final userSnap =
+      var userSnap =
       await FirebaseFirestore.instance.collection("users").doc(widget.uid).get();
       setState(() {
-        userData = userSnap.data() ?? {};
+        userData = userSnap.data()!;
       });
 
-      final postSnap =
+      var postSnap =
       await FirebaseFirestore.instance.collection("post").where('uid', isEqualTo: widget.uid).get();
       setState(() {
         postLen = postSnap.docs.length;
       });
-
       setState(() {
-        followers = userData["followers"] != null ? userData["followers"].length : 0;
+        followers = userSnap.data()!["followers"].length;
       });
-
       setState(() {
-        following = userData["following"] != null ? userData["following"].length : 0;
+        following = userSnap.data()!["following"].length;
       });
-
       setState(() {
-        isfollowing = userData["followers"] != null && userData["followers"].contains(FirebaseAuth.instance.currentUser!.uid);
+        isfollowing = userSnap.data()!["followers"].contains(FirebaseAuth.instance.currentUser!.uid);
       });
     } catch (e) {
       showSnackBar(e.toString(), context);
@@ -68,6 +71,83 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       isLoading = false;
     });
+  }
+
+  Future<void> updateUsername(String newUsername) async {
+    try {
+      await FirebaseFirestore.instance.collection("users").doc(widget.uid).update({
+        "username": newUsername,
+      });
+
+      setState(() {
+        userData["username"] = newUsername;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Username updated successfully."),
+        ),
+      );
+    } catch (e) {
+      showSnackBar("Error updating username: $e", context);
+    }
+  }
+
+  Future<bool> checkUsernameAvailability(String newUsername) async {
+    try {
+      final querySnapshot =
+      await FirebaseFirestore.instance.collection("users").where("username", isEqualTo: newUsername).get();
+      return querySnapshot.docs.isEmpty;
+    } catch (e) {
+      showSnackBar("Error checking username availability: $e", context);
+      return false;
+    }
+  }
+
+  void showEditProfileDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Edit Profile"),
+          backgroundColor: Theme.of(context).backgroundColor,
+          content: TextField(
+            controller: newUsernameController,
+            decoration: InputDecoration(
+              hintText: "Enter new username",
+            ),
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () async {
+                String newUsername = newUsernameController.text.trim();
+                if (newUsername.isNotEmpty) {
+                  bool isUsernameAvailable = await checkUsernameAvailability(newUsername);
+
+                  if (isUsernameAvailable) {
+                    await updateUsername(newUsername);
+                    Navigator.of(context).pop();
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Username is already taken."),
+                      ),
+                    );
+                  }
+                }
+              },
+              child: Text("Save"),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text("Cancel"),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Column buildStatColumn(int num, String label) {
@@ -81,179 +161,227 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
         Padding(
           padding: const EdgeInsets.only(top: 5),
-          child: Text(
-            label,
-            style: const TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-              color: Colors.grey,
-            ),
-          ),
+          child: Text(label, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
         ),
       ],
     );
   }
 
-
-  Future<void> _pickImage() async {
-    final picker = ImagePicker();
-    final pickedFile = await picker.getImage(source: ImageSource.gallery);
-
-    if (pickedFile != null) {
-      setState(() {
-        userData["photourl"] = pickedFile.path;
-      });
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? const Center(child: CircularProgressIndicator())
+        ? Center(child: CircularProgressIndicator())
         : Scaffold(
       appBar: AppBar(
-          backgroundColor: mobileBackgroundColor,
-          title: Text(userData["username"] ?? "Username")),
+        backgroundColor: Theme.of(context).backgroundColor,
+        title: Text(
+          userData["username"] != null ? userData["username"] : "username",
+          style: TextStyle(color: Theme.of(context).textTheme.headline6!.color),
+        ),
+        actions: [
+          if (FirebaseAuth.instance.currentUser!.uid == widget.uid)
+            IconButton(
+              icon: Icon(Icons.edit),
+              color: Theme.of(context).textTheme.headline6!.color,
+              onPressed: () {
+                showEditProfileDialog(context);
+              },
+            ),
+          IconButton(
+            icon: Icon(Icons.photo),
+            color: Theme.of(context).textTheme.headline6!.color,
+            onPressed: () {
+              showChangeProfilePictureDialog(context);
+            },
+          ),
+        ],
+      ),
       body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.all(16),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
               children: [
-                InkWell(
-                  onTap: _pickImage,
-                  child: CircleAvatar(
-                    radius: 48,
-                    backgroundColor: Colors.grey,
-                    backgroundImage: userData["photourl"] != null
-                        ? FileImage(File(userData["photourl"])) as ImageProvider<Object>?
-                        : userData["photourl"] != null
-                        ? NetworkImage(userData["photourl"]) as ImageProvider<Object>?
-                        : AssetImage("assets/images/default_profile_picture.jpeg") as ImageProvider<Object>?,
-                  ),
-                ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 48,
+                      backgroundColor: Colors.grey,
+                      backgroundImage: NetworkImage(userData["photourl"]),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Column(
                         children: [
-                          buildStatColumn(postLen, "Posts"),
-                          buildStatColumn(followers, "Followers"),
-                          buildStatColumn(following, "Following"),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              buildStatColumn(postLen, "Posts"),
+                              buildStatColumn(followers, "Followers"),
+                              buildStatColumn(following, "Following"),
+                            ],
+                          ),
+                          FirebaseAuth.instance.currentUser!.uid == widget.uid
+                              ? FollowButton(
+                            backgroundColor: Theme.of(context).backgroundColor,
+                            borderColor: Colors.grey,
+                            text: "Sign Out",
+                            //textColor: Theme.of(context).textTheme.headline6!.color,
+                            textColor: Theme.of(context).textTheme.headline6?.color ?? Colors.black,
+                            function: () async {
+                              await AuthMethods().signOut();
+                              Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
+                            },
+                          )
+                              : isfollowing
+                              ? FollowButton(
+                            backgroundColor: Colors.white,
+                            borderColor: Colors.grey,
+                            text: "Unfollow",
+                            textColor: Colors.black,
+                            function: () async {
+                              await FirestoreMethod().followUser(
+                                FirebaseAuth.instance.currentUser!.uid,
+                                widget.uid!,
+                              );
+                              setState(() {
+                                isfollowing = false;
+                                followers--;
+                              });
+                            },
+                          )
+                              : FollowButton(
+                            backgroundColor: Colors.blue,
+                            borderColor: Colors.grey,
+                            text: "Follow",
+                            textColor: Theme.of(context).primaryColor,
+                            function: () async {
+                              await FirestoreMethod().followUser(
+                                FirebaseAuth.instance.currentUser!.uid,
+                                widget.uid!,
+                              );
+                              setState(() {
+                                isfollowing = true;
+                                followers++;
+                              });
+                            },
+                          ),
                         ],
                       ),
-                      FirebaseAuth.instance.currentUser!.uid == widget.uid
-                          ? FollowButton(
-                        backgroundColor: mobileBackgroundColor,
-                        borderColor: Colors.grey,
-                        text: "Sign Out",
-                        textColor: primaryColor,
-                        function: () async {
-                          await AuthMethods().signOut();
-                          Navigator.of(context).pushReplacement(
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      LoginScreen()));
-                        },
-                      )
-                          : isfollowing
-                          ? FollowButton(
-                        backgroundColor: Colors.white,
-                        borderColor: Colors.grey,
-                        text: "Unfollow",
-                        textColor: Colors.black,
-                        function: () async {
-                          await FirestoreMethod().followUser(
-                              FirebaseAuth.instance.currentUser!.uid,
-                              widget.uid!);
-                          setState(() {
-                            isfollowing = false;
-                            followers--;
-                          });
-                        },
-                      )
-                          : FollowButton(
-                        backgroundColor: Colors.blue,
-                        borderColor: Colors.grey,
-                        text: "Follow",
-                        textColor: primaryColor,
-                        function: () async {
-                          await FirestoreMethod().followUser(
-                              FirebaseAuth.instance.currentUser!.uid,
-                              widget.uid!);
-                          setState(() {
-                            isfollowing = true;
-                            followers++;
-                          });
-                        },
-                      ),
-                    ],
+                    ),
+                  ],
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(top: 15),
+                  child: Text(
+                    userData["username"] != null ? userData["username"] : "username",
+                    style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.headline6!.color),
                   ),
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  padding: const EdgeInsets.only(top: 2),
+                  child: Text(
+                    userData["email"] != null ? userData["email"] : "email@gmail.com",
+                    style: TextStyle(color: Theme.of(context).textTheme.headline6!.color),
+                  ),
+                ),
+                const Divider(),
+                FutureBuilder(
+                  future: FirebaseFirestore.instance.collection("post").where("uid", isEqualTo: widget.uid).get(),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
+                    }
+
+                    return GridView.builder(
+                      shrinkWrap: true,
+                      itemCount: (snapshot.data! as dynamic).docs.length,
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 3,
+                        crossAxisSpacing: 5,
+                        childAspectRatio: 1,
+                        mainAxisSpacing: 1.5,
+                      ),
+                      itemBuilder: (context, index) {
+                        DocumentSnapshot snap = (snapshot.data! as dynamic).docs[index];
+                        return Container(
+                          child: Image(
+                            image: NetworkImage(snap["postUrl"]),
+                            fit: BoxFit.cover,
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ],
             ),
           ),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.only(top: 15, left: 5),
-            child: Text(
-              userData["username"] ?? "Username",
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: const EdgeInsets.only(top: 2,left: 5),
-            child: Text(
-              userData["email"] ?? "email@gmail.com",
-            ),
-          ),
-          const Divider(),
-          FutureBuilder(
-            future: FirebaseFirestore.instance.collection("post").where("uid", isEqualTo: widget.uid).get(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              }
-              if (snapshot.hasError) {
-                return Center(child: Text("Error: ${snapshot.error}"));
-              }
-
-              final data = snapshot.data as QuerySnapshot;
-
-              if (data.docs.isEmpty) {
-                return const Center(
-                  child: Text("No posts available."),
-                );
-              }
-
-              return GridView.builder(
-                shrinkWrap: true,
-                itemCount: (snapshot.data! as dynamic).docs.length,
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 5,
-                  childAspectRatio: 1,
-                  mainAxisSpacing: 1.5,
-                ),
-                itemBuilder: (context, index) {
-                  DocumentSnapshot snap = (snapshot.data! as dynamic).docs[index];
-                  return Container(
-                    child: Image(
-                      image: NetworkImage(snap["postUrl"]),
-                      fit: BoxFit.cover,
-                    ),
-                  );
-                },
-              );
-            },
-          )
         ],
       ),
     );
   }
+
+  void showChangeProfilePictureDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("Change Profile Picture"),
+          backgroundColor: Theme.of(context).backgroundColor,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+
+                  final pickedImage = await ImagePicker().getImage(source: ImageSource.gallery);
+                  if (pickedImage != null) {
+                    File imageFile = File(pickedImage.path);
+                    String fileName = "${widget.uid}_${DateTime.now().millisecondsSinceEpoch}.jpg";
+                    final Reference storageReference = FirebaseStorage.instance.ref().child('profile_images/$fileName');
+
+                    await storageReference.putFile(imageFile);
+
+                    final String downloadURL = await storageReference.getDownloadURL();
+
+                    setState(() {
+                      userData["photourl"] = downloadURL;
+                    });
+
+                    await FirebaseFirestore.instance.collection("users").doc(widget.uid).update({
+                      "photourl": downloadURL,
+                    });
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Profile picture updated successfully."),
+                      ),
+                    );
+                  }
+                },
+                child: Text("Choose from Gallery"),
+              ),
+              TextButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+
+                  final pickedImage = await ImagePicker().getImage(source: ImageSource.camera);
+                  if (pickedImage != null) {
+                    // Same logic as above for uploading and updating
+                  }
+                },
+                child: Text("Take a Photo"),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
 }
+

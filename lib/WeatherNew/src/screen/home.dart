@@ -64,8 +64,9 @@ class _HomeState extends State<Home> {
                   IconButton(
                     icon: Icon(
                       Icons.search,
-                      color: Theme.of(context).primaryColor,
-                    ),
+                      color: Theme.of(context).brightness == Brightness.dark
+                          ? Colors.white
+                          : Theme.of(context).primaryColor,                    ),
                     onPressed: () {
                       citySearch();
                     },
@@ -75,7 +76,8 @@ class _HomeState extends State<Home> {
                 elevation: 0.0,
                 flexibleSpace: FlexibleSpaceBar(
                   expandedTitleScale: 1.6,
-                  titlePadding: EdgeInsets.all(18),
+
+                  titlePadding: EdgeInsets.all(14),
                   title: Text(
                     '     Weather Page',
                     style: Theme.of(context).textTheme.headline5,

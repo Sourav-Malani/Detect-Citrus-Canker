@@ -12,7 +12,16 @@ class FeedScreen extends StatelessWidget {
           return false; // Prevent default back button behavior
         },
         child: Scaffold(
-          appBar: AppBar(title: Text("Community"), backgroundColor: Colors.green,),
+          appBar: AppBar(
+            title: Text('Community'),
+            backgroundColor: Colors.green,
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back), // Add the back button icon here
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, '/mobileScreenLayout');
+              },
+            ),
+          ),
           body: StreamBuilder(
             stream: FirebaseFirestore.instance
                 .collection("post")
@@ -27,7 +36,7 @@ class FeedScreen extends StatelessWidget {
               return ListView.builder(
                   itemCount: snapshot.data!.docs.length,
                   itemBuilder: (context, index) =>
-                      PostCard(snap: snapshot.data!.docs[index].data()));
+                      PostCard(snap: snapshot.data!.docs[index].data(), backgroundColor: Colors.black, textColor: Colors.white,));
             },
           ),
         ));

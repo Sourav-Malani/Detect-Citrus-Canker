@@ -50,8 +50,8 @@ class _SplashScreenState extends State<SplashScreen> {
                   children: [
                     Image.asset(
                       'assets/icon/icon.png',
-                      height: 300.0,
-                      width: 300.0,
+                      height: 50,
+                      width: 50,
                     ),
                     Text(
                       "Canker Detection\n at your fingertips",
