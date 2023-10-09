@@ -13,6 +13,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Dart SDK
+        uses: dart/setup-dart@v2
+        with:
+          dart-version: '2.19.2' # Use the minimum required Dart SDK version
+
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
@@ -29,15 +34,19 @@ jobs:
           mkdir -p release
           mv build/app/outputs/flutter-apk/* release/
 
+      - name: Set Version Variables
+        id: set_version
+        run: echo "::set-env name=VERSION::v${{ github.run_number }}-alpha"
+
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
           files: release/*  # Upload all files in the release directory
-          tag_name: v0.7-alpha  # Specify your desired tag name
-          title: v0.7 alpha  # Specify your desired release title
+          tag_name: ${{ steps.set_version.outputs.VERSION }}
+          title: ${{ steps.set_version.outputs.VERSION }}
           body: |
-            Release notes for v0.7 alpha
+            Release notes for ${{ steps.set_version.outputs.VERSION }}
             - Add new feature
             - Fix bugs
         env:
