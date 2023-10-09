@@ -15,7 +15,7 @@ jobs:
 
       - name: Install Dart SDK
         run: |
-          DART_VERSION=">=2.19.2 <3.0.4"  # Replace with your desired Dart SDK version
+          DART_VERSION="3.0.3"  # Replace with your desired Dart SDK version
           DART_SDK_URL="https://storage.googleapis.com/dart-archive/channels/stable/release/${DART_VERSION}/sdk/dartsdk-linux-x64-release.zip"
           mkdir -p /opt/dart
           curl -fsSL "$DART_SDK_URL" -o /tmp/dart-sdk.zip
