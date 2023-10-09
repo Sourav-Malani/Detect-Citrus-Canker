@@ -1,36 +1,45 @@
-# name: Build and Deploy
+name: Build and Deploy
 
-# on:
-#   push:
-#     branches:
-#       - main
+on:
+  push:
+    branches:
+      - main
 
-# jobs:
-#   build_and_deploy:
-#     runs-on: ubuntu-latest
+jobs:
+  build_and_deploy:
+    runs-on: windows-latest
 
-#     steps:
-#       - name: Checkout code
-#         uses: actions/checkout@v2
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-#       - name: Set up Flutter
-#         uses: subosito/flutter-action@v4
-#         with:
-#           flutter-version: '2.x.x'  # Specify your Flutter version
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v4
+        with:
+          flutter-version: '2.x.x'  # Specify your Flutter version
 
-#       - name: Build APK
-#         run: flutter build apk
+      - name: Build APKs
+        run: |
+          flutter build apk --split-per-abi
+          mkdir -p release
+          mv build/app/outputs/flutter-apk/* release/
 
-#       - name: Upload APK
-#         uses: actions/upload-artifact@v2
-#         with:
-#           name: app-release
-#           path: build/app/outputs/flutter-apk/app-release.apk
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: release/*  # Upload all files in the release directory
+          tag_name: v0.7 alpha  # Specify your desired tag name
+          title: v0.7 alpha  # Specify your desired release title
+          body: |
+            Release notes for v0.7 alpha
+            - Add new feature
+            - Fix bugs
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
-#       - name: Create Release
-#         id: create_release
-#         uses: softprops/action-gh-release@v1
-#         with:
-#           files: build/app/outputs/flutter-apk/app-release.apk
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload APKs
+        uses: actions/upload-artifact@v2
+        with:
+          name: apks
+          path: release/
