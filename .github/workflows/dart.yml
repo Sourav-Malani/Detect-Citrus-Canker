@@ -13,54 +13,36 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Install Dart SDK
-        run: |
-          DART_VERSION="3.0.3"  # Replace with your desired Dart SDK version
-          DART_SDK_URL="https://storage.googleapis.com/dart-archive/channels/stable/release/${DART_VERSION}/sdk/dartsdk-linux-x64-release.zip"
-          mkdir -p /opt/dart
-          curl -fsSL "$DART_SDK_URL" -o /tmp/dart-sdk.zip
-          unzip -q /tmp/dart-sdk.zip -d /opt/dart
-          echo "export PATH=\"/opt/dart/dart-sdk/bin:\$PATH\"" >> $GITHUB_ENV
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.0.3'
-          channel: 'stable'
-
-      - name: Display Flutter version
-        run: flutter --version
-
-      - name: Set Dart SDK Path
-        run: export PATH="/opt/dart/dart-sdk/bin:$PATH"
-
-      - name: Build APKs
-        run: |
-          flutter pub get
-          flutter build apk --split-per-abi
-          mkdir -p release
-          mv build/app/outputs/flutter-apk/* release/
-
       - name: Set Version Variables
         id: set_version
         run: echo "::set-env name=VERSION::v${{ github.run_number }}-alpha"
 
-      - name: Create GitHub Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
+      - name: Build APKs
+      - uses: actions/setup-java@v1
         with:
-          files: release/*  # Upload all files in the release directory
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "beta"
+      - run: flutter clean
+      - run: flutter pub get
+      - run: flutter build apk --release --split-per-abi
+
+      - run: flutter build appbundle --release
+
+      - name: Create a Release in GitHub
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/app-release.aab"
           tag_name: ${{ steps.set_version.outputs.VERSION }}
           title: ${{ steps.set_version.outputs.VERSION }}
           body: |
             Release notes for ${{ steps.set_version.outputs.VERSION }}
             - Add new feature
             - Fix bugs
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
-      - name: Upload APKs
+      - name: Upload app bundle
         uses: actions/upload-artifact@v2
         with:
-          name: apks
-          path: release/
+          name: appbundle
+          path: build/app/outputs/bundle/release/app-release.aab
