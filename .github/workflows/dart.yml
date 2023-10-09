@@ -38,6 +38,7 @@ jobs:
         run: |
           export PATH="/opt/dart/dart-sdk/bin:$PATH"  # Set Dart SDK path again
           flutter pub get
+          flutter pub upgrade
           flutter build apk --split-per-abi
           mkdir -p release
           mv build/app/outputs/flutter-apk/* release/
