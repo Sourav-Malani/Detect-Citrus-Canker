@@ -13,10 +13,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set Version Variables
-        id: set_version
-        run: echo "::set-env name=VERSION::v${{ github.run_number }}-alpha"
-
       - name: Build APKs
         uses: actions/setup-java@v1
         with:
@@ -37,10 +33,10 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/app-release.aab"
-          tag_name: ${{ steps.set_version.outputs.VERSION }}
-          title: ${{ steps.set_version.outputs.VERSION }}
+          tag_name: 'v1'
+          title: 'demo'
           body: |
-            Release notes for ${{ steps.set_version.outputs.VERSION }}
+            Release notes for v1
             - Add new feature
             - Fix bugs
 
