@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Flutter CI
 
 on:
   push:
@@ -6,63 +6,21 @@ on:
       - main
 
 jobs:
-  build_and_deploy:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install Dart SDK
-        run: |
-          DART_VERSION="2.19.2"  # Replace with your desired Dart SDK version
-          DART_SDK_URL="https://storage.googleapis.com/dart-archive/channels/stable/release/${DART_VERSION}/sdk/dartsdk-linux-x64-release.zip"
-          mkdir -p /opt/dart
-          curl -fsSL "$DART_SDK_URL" -o /tmp/dart-sdk.zip
-          unzip -q /tmp/dart-sdk.zip -d /opt/dart
-          echo "export PATH=\"/opt/dart/dart-sdk/bin:\$PATH\"" >> $GITHUB_ENV
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
         with:
-          flutter-version: '3.0.3'
-          channel: 'stable'
-
-      - name: Display Flutter version
-        run: flutter --version
-
-      - name: Set Dart SDK Path
-        run: export PATH="/opt/dart/dart-sdk/bin:$PATH"
-
-      - name: Build APKs
-        run: |
-          export PATH="/opt/dart/dart-sdk/bin:$PATH"  # Set Dart SDK path again
-          flutter pub upgrade
-          flutter pub get
-          flutter build apk --split-per-abi
-          mkdir -p release
-          mv build/app/outputs/flutter-apk/* release/
-
-      - name: Set Version Variables
-        id: set_version
-        run: echo "::set-env name=VERSION::v${{ github.run_number }}-alpha"
-
-      - name: Create GitHub Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
         with:
-          files: release/*  # Upload all files in the release directory
-          tag_name: ${{ steps.set_version.outputs.VERSION }}
-          title: ${{ steps.set_version.outputs.VERSION }}
-          body: |
-            Release notes for ${{ steps.set_version.outputs.VERSION }}
-            - Add new feature
-            - Fix bugs
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-
-      - name: Upload APKs
-        uses: actions/upload-artifact@v2
+          channel: 'beta'
+      - run: flutter pub get
+      - run: flutter format --set-exit-if-changed .
+      - run: flutter analyze .
+      - run: flutter build apk
+      - uses: actions/upload-artifact@v1
         with:
-          name: apks
-          path: release/
+          name: release-apk
+          path: build/app/outputs/apk/release/app-release.apk
