@@ -1,4 +1,4 @@
-name: Flutter CI
+name: Build and release APK
 
 on:
   push:
@@ -22,7 +22,7 @@ jobs:
         id: gitversion
         uses: gittools/actions/gitversion/execute@v0.9.7
       - name: Create version.txt with nuGetVersion
-        run: echo ${{ steps.gitversion.outputs.nuGetVersion }} > version.txt
+        run: echo ${{ steps.gitversion.outputs.nuGetVersion  }} > version.txt
       - name: Upload version.txt
         uses: actions/upload-artifact@v2
         with:
@@ -35,7 +35,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        runner: [1, 2, 3]  # Adjust the number of runners as needed
+        runner: [1]  # Adjust the number of runners as needed
 
     steps:
       - name: Checkout code
