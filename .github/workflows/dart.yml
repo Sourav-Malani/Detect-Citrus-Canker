@@ -20,8 +20,7 @@ jobs:
           mkdir -p /opt/dart
           curl -fsSL "$DART_SDK_URL" -o /tmp/dart-sdk.zip
           unzip -q /tmp/dart-sdk.zip -d /opt/dart
-          export PATH="$PATH:/opt/dart/dart-sdk/bin"
-          dart --version
+          echo "export PATH=\"/opt/dart/dart-sdk/bin:\$PATH\"" >> $GITHUB_ENV
 
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
@@ -31,6 +30,9 @@ jobs:
 
       - name: Display Flutter version
         run: flutter --version
+
+      - name: Set Dart SDK Path
+        run: export PATH="/opt/dart/dart-sdk/bin:$PATH"
 
       - name: Build APKs
         run: |
