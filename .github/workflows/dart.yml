@@ -23,9 +23,6 @@ jobs:
         run: flutter --version
 
       - name: Build APKs
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.0.3'
         run: |
           flutter pub get
           flutter build apk --split-per-abi
