@@ -233,7 +233,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     var title = '';
 
     if (_resultStatus == _ResultStatus.notFound) {
-      title = 'Fail to recognize';
+      title = "Fail to recognize";
     } else if (_resultStatus == _ResultStatus.found) {
       title = _plantLabel;
     } else {
@@ -242,18 +242,18 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
 
     var accuracyLabel = '';
     if (_resultStatus == _ResultStatus.found) {
-      accuracyLabel =
-      'Probability: ${(_accuracy * 100).toStringAsFixed(2)}%';
+      accuracyLabel = 'Probability: ${(_accuracy * 100).toStringAsFixed(2)}%';
     }
 
     return Column(
       children: [
         Text(title, style: kResultTextStyle),
         SizedBox(height: 10),
-        if (title != 'Fail to recognize')
+        if (_resultStatus == _ResultStatus.found)
           Text(accuracyLabel, style: kResultRatingTextStyle),
         SizedBox(height: 20),
-        if (_resultStatus == _ResultStatus.found || title != 'Fail to recognize')
+        if (_resultStatus == _ResultStatus.found &&
+            _plantLabel != "Fail to recognize" && title!="Fail to recognize")
           GestureDetector(
             onTap: _navigateToRecommendationsPage,
             child: Container(
@@ -261,10 +261,17 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                border: Border.all(color: Colors.greenAccent.withOpacity(0.7), width: 2), // Add a border with color
+                border: Border.all(
+                  color: Colors.greenAccent.withOpacity(0.7),
+                  width: 2,
+                ),
               ),
-              child: Center(child: Text('Treatment')),
-            ),          ),
+              child: Center(child: Text('Treatment',style: TextStyle(
+                color: Colors.white, // Set text color to white
+                fontSize: 16, // You can adjust the font size as needed
+              ),),),
+            ),
+          ),
       ],
     );
   }
