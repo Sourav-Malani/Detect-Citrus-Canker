@@ -1,33 +1,25 @@
-name: Build and release APK
+name: Build and Release APKs
 
 on:
   push:
-    branches:
-      - main
-
+    branches: [main]
 jobs:
   version:
     name: Create version number
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v1
       - name: Fetch all history for all tags and branches
         run: |
+          git config remote.origin.url https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ github.repository }}
           git fetch --prune --depth=10000
       - name: Install GitVersion
-        run: |
-          # Install GitVersion
-          curl -Ls -o gitversion.tar.gz https://github.com/GitTools/GitVersion/releases/download/v5.12.0/GitVersion-bin-linux-x64.5.12.0.tar.gz
-          tar -xzf gitversion.tar.gz -C gitversion
-          chmod +x gitversion/GitVersion
-          mv gitversion/GitVersion /usr/local/bin/
-          rm -rf gitversion gitversion.tar.gz
-        shell: bash
+        uses: gittools/actions/gitversion/setup@v0.9.7
+        with:
+          versionSpec: "5.x"
       - name: Use GitVersion
         id: gitversion
-        run: gitversion
+        uses: gittools/actions/gitversion/execute@v0.9.7
       - name: Create version.txt with nuGetVersion
         run: echo ${{ steps.gitversion.outputs.nuGetVersion  }} > version.txt
       - name: Upload version.txt
@@ -35,71 +27,39 @@ jobs:
         with:
           name: gitversion
           path: version.txt
-
   build:
     name: Build APK and Create release
     needs: [version]
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        runner: [1]  # Adjust the number of runners as needed
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v1
       - name: Get version.txt
         uses: actions/download-artifact@v2
         with:
           name: gitversion
-
       - name: Create new file without newline char from version.txt
         run: tr -d '\n' < version.txt > version1.txt
-
       - name: Read version
         id: version
         uses: juliangruber/read-file-action@v1
         with:
           path: version1.txt
-
-      - name: Get the latest release tag
-        id: get-release
-        run: echo ::set-output name=tag::$(git describe --tags --abbrev=0)
-        shell: bash
-
-      - name: Increment the version
-        id: increment-version
-        run: echo ::set-output name=incremented::$(echo ${{ steps.get-release.outputs.tag }} | awk -F. '{print $1 "." $2 "." $3 + 1}')
-        shell: bash
-
       - name: Update version in YAML
-        run: sed -i "s/99.99.99+99/${{ steps.increment-version.outputs.incremented }}+${{ github.run_number }}/g" pubspec.yaml
-
-      - name: Cache Flutter and Dart dependencies
-        uses: actions/cache@v2
-        with:
-          path: |
-            ~/.pub-cache
-            ~/flutter
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/*.lock') }}
-
-      - name: Set up Java
-        uses: actions/setup-java@v1
+        run: sed -i 's/99.99.99+99/${{ steps.version.outputs.content }}+${{ github.run_number }}/g' pubspec.yaml
+      - name: Update KeyStore password in gradle properties
+        run: sed -i 's/#{KEYSTORE_PASS}#/${{ secrets.KEY_PASSWORD }}/g' android/key.properties
+      - name: Update KeyStore key password in gradle properties
+        run: sed -i 's/#{KEYSTORE_KEY_PASS}#/${{ secrets.STORE_PASSWORD }}/g' android/key.properties
+      - uses: actions/setup-java@v1
         with:
           java-version: "12.x"
-
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v1
+      - uses: subosito/flutter-action@v1
         with:
           channel: "beta"
-
-      - name: Flutter clean
-        run: flutter clean
-
-      - name: Flutter pub get
-        run: flutter pub get
-
-      - run: flutter build apk --split-per-abi
+      - run: flutter clean
+      - run: flutter pub get
+      - run: flutter build apk --release --split-per-abi
+      - run: flutter build appbundle --release
       - name: Create a Release in GitHub
         uses: ncipollo/release-action@v1
         with:
