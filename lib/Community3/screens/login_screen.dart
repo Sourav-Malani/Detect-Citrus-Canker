@@ -11,6 +11,7 @@ import '../responsive/responsive_layout_screen.dart';
 import '../responsive/webscreenlayout.dart';
 import 'package:quickalert/quickalert.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -65,16 +66,16 @@ class _LoginScreenState extends State<LoginScreen> {
       QuickAlert.show(
         context: context,
         type: QuickAlertType.error,
-        title: 'Oops...',
-        text: 'Incorrect email or password. Please try again.',
+        title: "OOPS_Text".tr(),
+        text: "IncorrectPassEmail_Text".tr(),
       );
     } else {
       // Handle other possible errors here
       QuickAlert.show(
         context: context,
         type: QuickAlertType.error,
-        title: 'Oops...',
-        text: "Password Invalid",
+        title: "OOPS_Text".tr(),
+        text: "InvalidPassword".tr(),
       );
     }
     setState(() {
@@ -104,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login")),
+      appBar: AppBar(title: Text("Login_text".tr())),
       body: SafeArea(
           child: Container(
         padding: EdgeInsets.symmetric(horizontal: 32),
@@ -123,12 +124,12 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(height: 25),
             TextFieldInput(
                 textEditingController: _emailController,
-                hintText: "Enter your email",
+                hintText: "Email-text".tr(),
                 textInputType: TextInputType.emailAddress),
             const SizedBox(height: 24),
             TextFieldInput(
               textEditingController: _passwordController,
-              hintText: "Password",
+              hintText: "Password-text".tr(),
               textInputType: TextInputType.visiblePassword,
               ispass: true,
             ),
@@ -138,7 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: isloading
                   ? Center(child: CircularProgressIndicator())
                   : Container(
-                      child: Text("Log In"),
+                      child: Text("Login_text".tr()),
                       width: double.infinity,
                       alignment: Alignment.center,
                       padding: const EdgeInsets.symmetric(vertical: 15),
@@ -153,7 +154,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  child: const Text("Dont have an account"),
+                  child:  Text("NewtoCankerDetect_text".tr()),
                   padding: const EdgeInsets.symmetric(vertical: 8),
                 ),
                 const SizedBox(
@@ -162,8 +163,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 GestureDetector(
                   onTap: navigatetosignup,
                   child: Container(
-                    child: const Text(
-                      "Sign Up",
+                    child:  Text(
+                      "SignUp_text".tr(),
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),
@@ -177,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  child: const Text("Forgot Password?"),
+                  child:  Text("ForgotPassword_text".tr()),
                   padding: const EdgeInsets.symmetric(vertical: 8),
                 ),
                 const SizedBox(
@@ -186,8 +187,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 GestureDetector(
                   onTap: navigatetoForgot,
                   child: Container(
-                    child: const Text(
-                      "Reset here",
+                    child:  Text(
+                      "ResetHere_text".tr(),
                       style:
                       TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),

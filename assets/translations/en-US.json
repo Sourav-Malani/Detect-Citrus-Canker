@@ -38,5 +38,31 @@
     "LogOut_text": "Logout",
     "Gallery_text": "Gallery",
     "Weather_text" : "Weather",
-    "Camera_text": "Camera"
+    "Camera_text": "Camera",
+    "OOPS_Text": "Oops...",
+    "IncorrectPassEmail_Text": "Incorrect email or password. Please try again.",
+    "InvalidPassword": "Password Invalid",
+    "SignupEmptyFieldsError":"Please fill in all the fields and select an image.",
+    "UsernameSignup": "Username",
+    "Posted_text": "Posted",
+    "CreatePost_text": "Create a post",
+    "TakePhoto_text": "Take a photo",
+    "ChooseGallery-text": "Choose from Gallery",
+    "Detect_Text": "Detect",
+    "PostTo_text": "Post to",
+    "Post_Text" : "Post",
+    "CaptionText" :"Write a caption..",
+    "Instructions": "Instructions",
+    "Features": "Features",
+    "Check Weather": "Check Weather",
+    "Detect Canker": "Detect Canker",
+    "Citrus Canker Detection": "Citrus Canker Detection",
+    "Treatment": "Treatment",
+    "Fail to recognize": "Fail to recognize",
+    "Citrus Canker Recommendations": "Citrus Canker Recommendations",
+    "1. Isolate the Infected Plant:": "1. Isolate the Infected Plant:",
+    "Move the infected plant away from healthy citrus trees to prevent the disease from spreading": "Move the infected plant away from healthy citrus trees to prevent the disease from spreading.",
+    "Sign Out": "Sign Out"
+
 }
+

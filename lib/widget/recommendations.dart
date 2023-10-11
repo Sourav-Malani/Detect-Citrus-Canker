@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class CitrusCankerRecommendationsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class CitrusCankerRecommendationsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Citrus Canker Recommendations'),
+        title: Text('Citrus Canker Recommendations'.tr()),
         backgroundColor: Colors.green,
       ),
       backgroundColor: backgroundColor, // Set the background color based on theme mode
@@ -23,7 +23,7 @@ class CitrusCankerRecommendationsPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Citrus Canker Recommendations',
+                'Citrus Canker Recommendations'.tr(),
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -32,8 +32,8 @@ class CitrusCankerRecommendationsPage extends StatelessWidget {
               ),
               SizedBox(height: 16),
               _buildRecommendation(
-                '1. Isolate the Infected Plant:',
-                'Move the infected plant away from healthy citrus trees to prevent the disease from spreading.',
+                  "1. Isolate the Infected Plant:".tr(),
+                'Move the infected plant away from healthy citrus trees to prevent the disease from spreading'.tr(),
                 textColor,
               ),
               _buildRecommendation(

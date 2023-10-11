@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'dart:async';
+import 'package:easy_localization/easy_localization.dart';
 
 // import 'package:flutter/material.dart';
 // import 'dart:async';
@@ -17,17 +18,17 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     {
       'title': "Onboarding-titleOne".tr(),
       'description': "Onboarding-titleOneDesc".tr(),
-      'imagePath': 'assets/images/community.png',
+      'imagePath': 'assets/images/card3.png',
     },
     {
       'title': "Onboarding-titleTwo".tr(),
       'description': "Onboarding-titleTwoDesc".tr(),
-      'imagePath': 'assets/images/plant_two.png',
+      'imagePath': 'assets/images/card1.png',
     },
     {
       'title': "Onboarding-titleThree".tr(),
       'description': "Onboarding-titleThreeDesc".tr(),
-      'imagePath': 'assets/images/weather.png',
+      'imagePath': 'assets/images/card2.png',
     },
   ];
 
@@ -67,7 +68,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Homepage"),
+        title: Text("HomePage_text".tr()),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
@@ -90,7 +91,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                "Instructions",
+                "Instructions".tr(),
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
@@ -98,7 +99,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
               ),
             ),
             SizedBox(
-              height: 200,
+              height: 212,
               child: PageView.builder(
                 itemCount: imagesData.length,
                 controller: _pageController,
@@ -115,7 +116,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Text(
-                "Features",
+                "Features".tr(),
                 style: TextStyle(
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
@@ -129,21 +130,21 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
                 children: <Widget>[
                   _buildCard(
                     context,
-                    'Detect Canker',
+                    'Detect Canker'.tr(),
                     'assets/images/card1.png',
                     Colors.orange,
                   ),
                   const SizedBox(height: 20.0),
                   _buildCard(
                     context,
-                    'Check Weather',
+                    'Check Weather'.tr(),
                     'assets/images/card2.png',
                     Colors.blue.shade200,
                   ),
                   const SizedBox(height: 20.0),
                   _buildCard(
                     context,
-                    'Community',
+                    'Community_text'.tr(),
                     'assets/images/card3.png',
                     Colors.greenAccent,
                   ),
@@ -203,11 +204,11 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
     Color color,
   ) {
     String route = '';
-    if (title == 'Detect Canker') {
+    if (title == 'Detect Canker'.tr()) {
       route = "/PlantRecogniser";
-    } else if (title == 'Check Weather') {
+    } else if (title == 'Check Weather'.tr()) {
       route = "/NewWeather";
-    } else if (title == 'Community') {
+    } else if (title == 'Community_text'.tr()) {
       route = "/feedScreen";
     }
 

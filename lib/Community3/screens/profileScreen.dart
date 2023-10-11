@@ -11,7 +11,7 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
-
+import 'package:easy_localization/easy_localization.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -226,7 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ? FollowButton(
                             backgroundColor: Theme.of(context).backgroundColor,
                             borderColor: Colors.grey,
-                            text: "Sign Out",
+                            text: "Sign Out".tr(),
                             //textColor: Theme.of(context).textTheme.headline6!.color,
                             textColor: Theme.of(context).textTheme.headline6?.color ?? Colors.black,
                             function: () async {
