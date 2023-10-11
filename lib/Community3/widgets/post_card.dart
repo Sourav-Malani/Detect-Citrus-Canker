@@ -86,7 +86,7 @@ class _PostCardState extends State<PostCard> {
                   onPressed: () {
                     // Check if the current user is the owner of the post
 
-                    if (widget.snap["username"] == user?.username) {
+                    if (widget.snap["uid"] == user?.uid) {
                       showDialog(
                         context: context,
                         builder: (context) => Dialog(
@@ -98,7 +98,7 @@ class _PostCardState extends State<PostCard> {
                                   (e) => InkWell(
                                 onTap: () async {
                                   // Check again if the current user is the owner before deleting
-                                  if (widget.snap["username"] == user?.username) {
+                                  if (widget.snap["uid"] == user?.uid) {
                                     FirestoreMethod().deletePost(widget.snap["postId"]);
                                     Navigator.of(context).pop();
                                   } else {

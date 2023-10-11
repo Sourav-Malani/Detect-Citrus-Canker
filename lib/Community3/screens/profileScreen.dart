@@ -12,6 +12,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:canker_detect/Community3/providers/user_providers.dart';
+import 'package:provider/provider.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -21,9 +23,12 @@ class ProfileScreen extends StatefulWidget {
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
+
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late UserProvider userProvider ;
+
   var userData = {};
   int postLen = 0;
   int followers = 0;
@@ -34,6 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
+    userProvider = Provider.of<UserProvider>(context, listen: false);
     print("Current User UID: ${FirebaseAuth.instance.currentUser!.uid}");
     super.initState();
     getData();
@@ -78,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       await FirebaseFirestore.instance.collection("users").doc(widget.uid).update({
         "username": newUsername,
       });
-
+      userProvider.updateUsername(newUsername);
       setState(() {
         userData["username"] = newUsername;
       });

@@ -12,20 +12,18 @@ class UserProvider with ChangeNotifier {
     _user = user;
     notifyListeners();
   }
+
+  void updateUsername(String newUsername) {
+    if (_user != null) {
+      User updatedUser = _user!.copyWith(username: newUsername); // Create a new User instance with the updated username
+      _user = updatedUser; // Update the _user field
+      notifyListeners();
+    }
+  }
+
 }
 
 
-//Modified.
-// class UserProvider with ChangeNotifier {
-//   final AuthMethods _authMethods = AuthMethods();
-//   User? _user;
-//   User get getUser => _user ?? User(email: '0', uid: '', photoUrl: '', username: '', followers: [], following: []);
 
-//   Future<void> refreshUser() async {
-//     User? user = await _authMethods.getUserDetails();
-//     _user = user ?? const User(email: '0', uid: '', photoUrl: '', username: '', followers: [], following: []);
-//     notifyListeners();
-//   }
-// }
 
 
