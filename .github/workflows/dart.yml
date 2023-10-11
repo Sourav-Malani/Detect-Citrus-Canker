@@ -1,31 +1,74 @@
-name: Build My Apps
+name: Flutter CI
 
 on:
-  workflow_dispatch:
-
-
+  push:
+    branches: [main]
 jobs:
-  build:
-    name: Build and Release new apk
+  version:
+    name: Create version number
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-java@v2
+      - uses: actions/checkout@v1
+      - name: Fetch all history for all tags and branches
+        run: |
+          git config remote.origin.url https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ github.repository }}
+          git fetch --prune --depth=10000
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0.9.7
         with:
-          distribution: 'zulu'
-          java-version: '11'
-
-      - uses: subosito/flutter-action@v2
+          versionSpec: "5.x"
+      - name: Use GitVersion
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0.9.7
+      - name: Create version.txt with nuGetVersion
+        run: echo ${{ steps.gitversion.outputs.nuGetVersion  }} > version.txt
+      - name: Upload version.txt
+        uses: actions/upload-artifact@v2
         with:
-          channel: 'stable'
-      - run: flutter --version
-
+          name: gitversion
+          path: version.txt
+  build:
+    name: Build APK and Create release
+    needs: [version]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Get version.txt
+        uses: actions/download-artifact@v2
+        with:
+          name: gitversion
+      - name: Create new file without newline char from version.txt
+        run: tr -d '\n' < version.txt > version1.txt
+      - name: Read version
+        id: version
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: version1.txt
+      - name: Update version in YAML
+        run: sed -i 's/99.99.99+99/${{ steps.version.outputs.content }}+${{ github.run_number }}/g' pubspec.yaml
+      - name: Update KeyStore password in gradle properties
+        run: sed -i 's/#{KEYSTORE_PASS}#/${{ secrets.KEY_PASSWORD }}/g' android/key.properties
+      - name: Update KeyStore key password in gradle properties
+        run: sed -i 's/#{KEYSTORE_KEY_PASS}#/${{ secrets.STORE_PASSWORD }}/g' android/key.properties
+      - uses: actions/setup-java@v1
+        with:
+          java-version: "12.x"
+      - uses: subosito/flutter-action@v1
+        with:
+          channel: "beta"
+      - run: flutter clean
       - run: flutter pub get
       - run: flutter build apk --release --split-per-abi
-
-      - name: Push to Releases
+      - run: flutter build appbundle --release
+      - name: Create a Release in GitHub
         uses: ncipollo/release-action@v1
         with:
-          artifacts: "build/app/outputs/apk/release/*"
-          tag: v0.0.1
+          artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/app-release.aab"
           token: ${{ secrets.TOKEN }}
+          tag: ${{ steps.version.outputs.content }}
+          commit: ${{ github.sha }}
+      - name: Upload app bundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: appbundle
+          path: build/app/outputs/bundle/release/app-release.aab

@@ -252,8 +252,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
         if (_resultStatus == _ResultStatus.found)
           Text(accuracyLabel, style: kResultRatingTextStyle),
         SizedBox(height: 20),
-        if (_resultStatus == _ResultStatus.found &&
-            _plantLabel != "Fail to recognize" && title!="Fail to recognize")
+        if (_resultStatus == _ResultStatus.found ||
+            _plantLabel != "Fail to recognize" || title!="Fail to recognize")
           GestureDetector(
             onTap: _navigateToRecommendationsPage,
             child: Container(
@@ -266,7 +266,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                   width: 2,
                 ),
               ),
-              child: Center(child: Text('Treatment',style: TextStyle(
+              child: Center(child: Text('Treatment', style: TextStyle(
                 color: Colors.white, // Set text color to white
                 fontSize: 16, // You can adjust the font size as needed
               ),),),
