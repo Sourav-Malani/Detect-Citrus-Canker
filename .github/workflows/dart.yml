@@ -2,17 +2,19 @@ name: Build and release APK
 
 on:
   push:
-    branches: main
+    branches:
+      - main
 
 jobs:
   version:
     name: Create version number
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Fetch all history for all tags and branches
         run: |
-          git config remote.origin.url https://x-access-token:${{ secrets.TOKEN }}@github.com/${{ github.repository }}
           git fetch --prune --depth=10000
       - name: Install GitVersion
         uses: gittools/actions/gitversion/setup@v0.9.7
@@ -55,8 +57,20 @@ jobs:
         with:
           path: version1.txt
 
+      - name: Get the latest release tag
+        id: get-release
+        run: echo ::set-output name=tag::$(git describe --tags --abbrev=0)
+        shell: bash
+
+      - name: Increment the version
+        id: increment-version
+        run: echo ::set-output name=incremented::$(echo ${{ steps.get-release.outputs.tag }} | awk -F. '{print $1 "." $2 "." $3 + 1}')
+        shell: bash
+
       - name: Update version in YAML
-        run: sed -i 's/99.99.99+99/${{ steps.version.outputs.content }}+${{ github.run_number }}/g' pubspec.yaml
+        run: sed -i "s/99.99.99+99/${{ steps.increment-version.outputs.incremented }}+${{ github.run_number }}/g" pubspec.yaml
+
+      # Rest of your existing workflow steps...
 
       - name: Cache Flutter and Dart dependencies
         uses: actions/cache@v2
