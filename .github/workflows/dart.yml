@@ -17,12 +17,17 @@ jobs:
         run: |
           git fetch --prune --depth=10000
       - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0.9.7
-        with:
-          versionSpec: "5.x"
+        run: |
+          # Install GitVersion
+          curl -Ls -o gitversion.tar.gz https://github.com/GitTools/GitVersion/releases/download/v5.12.0/GitVersion-bin-linux-x64.5.12.0.tar.gz
+          tar -xzf gitversion.tar.gz -C gitversion
+          chmod +x gitversion/GitVersion
+          mv gitversion/GitVersion /usr/local/bin/
+          rm -rf gitversion gitversion.tar.gz
+        shell: bash
       - name: Use GitVersion
         id: gitversion
-        uses: gittools/actions/gitversion/execute@v0.9.7
+        run: gitversion
       - name: Create version.txt with nuGetVersion
         run: echo ${{ steps.gitversion.outputs.nuGetVersion  }} > version.txt
       - name: Upload version.txt
@@ -69,8 +74,6 @@ jobs:
 
       - name: Update version in YAML
         run: sed -i "s/99.99.99+99/${{ steps.increment-version.outputs.incremented }}+${{ github.run_number }}/g" pubspec.yaml
-
-      # Rest of your existing workflow steps...
 
       - name: Cache Flutter and Dart dependencies
         uses: actions/cache@v2
