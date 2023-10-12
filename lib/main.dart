@@ -87,6 +87,7 @@ import 'package:canker_detect/Community3/screens/feed_screens.dart';
 import 'package:canker_detect/Community3/screens/homescreen.dart';
 import 'package:canker_detect/WeatherPage.dart';
 import 'package:canker_detect/widget/plant_recogniser.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:canker_detect/Languages.dart';
@@ -123,7 +124,9 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
-
+  FirebaseFirestore.instance.settings = Settings(
+    persistenceEnabled: true, // Enable offline data
+  );
   // Create the theme controller
   var themeController = ThemeController();
 

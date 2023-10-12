@@ -1,5 +1,7 @@
 import 'dart:io';
 import 'package:canker_detect/widget/recommendations.dart';
+import 'package:canker_detect/widget/recommendations_final.dart';
+import 'package:canker_detect/widget/recommendations_initial.dart';
 import 'package:flutter/material.dart';
 import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
@@ -27,7 +29,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   bool _isAnalyzing = false;
   final picker = ImagePicker();
   File? _selectedImageFile;
-  String _recommendations = '';
+  //String _recommendations = '';
 
   // Result
   _ResultStatus _resultStatus = _ResultStatus.notStarted;
@@ -193,23 +195,23 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     final plantLabel = resultCategory.label;
     final accuracy = resultCategory.score;
 
-    if (result == _ResultStatus.found) {
-      if (plantLabel == 'CitrusHealthy') {
-        _recommendations = 'Your citrus plant looks healthy!';
-      } else if (plantLabel == 'CankerInitial') {
-        _recommendations =
-        'It seems like your citrus plant has an initial stage of canker. '
-            'Consider taking preventive measures.';
-      } else if (plantLabel == 'CankerFinal') {
-        _recommendations =
-        'Your citrus plant has a final stage of canker. '
-            'Immediate action is required. Consult an expert.';
-      } else {
-        _recommendations = '';
-      }
-    } else {
-      _recommendations = 'Fail to recognize the plant.';
-    }
+    // if (result == _ResultStatus.found) {
+    //   if (plantLabel == 'CitrusHealthy') {
+    //     _recommendations = 'Your citrus plant looks healthy!';
+    //   } else if (plantLabel == 'CankerInitial') {
+    //     _recommendations =
+    //     'It seems like your citrus plant has an initial stage of canker. '
+    //         'Consider taking preventive measures.';
+    //   } else if (plantLabel == 'CankerFinal') {
+    //     _recommendations =
+    //     'Your citrus plant has a final stage of canker. '
+    //         'Immediate action is required. Consult an expert.';
+    //   } else {
+    //     _recommendations = '';
+    //   }
+    // } else {
+    //   _recommendations = 'Fail to recognize the plant.';
+    // }
 
     _setAnalyzing(false);
 
@@ -221,13 +223,22 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   }
 
   void _navigateToRecommendationsPage() {
-    // Navigate to the recommendations page
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CitrusCankerRecommendationsPage(),
-      ),
-    );  }
+    if (_plantLabel == 'CitrusInitial') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CitrusCankerRecommendationsPage_Initial(),
+        ),
+      );
+    } else if (_plantLabel == 'CitrusFinal') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => CitrusCankerRecommendationsPage_Final(),
+        ),
+      );
+    }
+  }
 
   Widget _buildResultView() {
     var title = '';
@@ -242,18 +253,18 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
 
     var accuracyLabel = '';
     if (_resultStatus == _ResultStatus.found) {
-      accuracyLabel =
-      'Probability: ${(_accuracy * 100).toStringAsFixed(2)}%';
+      accuracyLabel = 'Probability: ${(_accuracy * 100).toStringAsFixed(2)}%';
     }
 
     return Column(
       children: [
-        Text(title, style: kResultTextStyle),
-        SizedBox(height: 10),
-        if (title != 'Fail to recognize')
+          Text(title, style: kResultTextStyle),
+          SizedBox(height: 10),
+        if (title != 'Fail To Recognize') ...[
           Text(accuracyLabel, style: kResultRatingTextStyle),
-        SizedBox(height: 20),
-        if (_resultStatus == _ResultStatus.found)
+        ],
+        if (title != 'Fail To Recognize' && _resultStatus == _ResultStatus.found) ...[
+          SizedBox(height: 20),
           GestureDetector(
             onTap: _navigateToRecommendationsPage,
             child: Container(
@@ -261,10 +272,14 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                border: Border.all(color: Colors.greenAccent.withOpacity(0.7), width: 2), // Add a border with color
+                border: Border.all(color: Colors.greenAccent.withOpacity(0.7), width: 2),
               ),
-              child: Center(child: Text('Treatment')),
-            ),          ),
+              child:
+                Center(child:
+                Text('Treatment')),
+            ),
+          ),
+        ],
       ],
     );
   }

@@ -54,17 +54,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       var postSnap =
       await FirebaseFirestore.instance.collection("post").where('uid', isEqualTo: widget.uid).get();
       setState(() {
+        userData = userSnap.data()!;
         postLen = postSnap.docs.length;
-      });
-      setState(() {
         followers = userSnap.data()!["followers"].length;
-      });
-      setState(() {
         following = userSnap.data()!["following"].length;
-      });
-      setState(() {
         isfollowing = userSnap.data()!["followers"].contains(FirebaseAuth.instance.currentUser!.uid);
       });
+
     } catch (e) {
       showSnackBar(e.toString(), context);
     }
@@ -105,6 +101,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   void showEditProfileDialog(BuildContext context) {
+    if (FirebaseAuth.instance.currentUser!.uid != widget.uid) {
+      // The user can only edit their own profile
+      showSnackBar("The user can only edit their own profile", context);
+
+      return;
+    }
+
     showDialog(
       context: context,
       builder: (context) {
@@ -150,18 +153,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Column buildStatColumn(int num, String label) {
+  Column buildStatColumn(int num, String label, Color textColor) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           num.toString(),
-          style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold,color: textColor),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 5),
-          child: Text(label, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w400)),
+          child: Text(
+            label,
+            style: TextStyle(fontSize: 15, fontWeight: FontWeight.w400, color: textColor), // Set the text color here
+          ),
         ),
       ],
     );
@@ -169,34 +175,48 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor = isDarkMode ? Colors.black : Colors.white;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
+
     return isLoading
         ? Center(child: CircularProgressIndicator())
-        : Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
-        title: Text(
-          userData["username"] != null ? userData["username"] : "username",
-          style: TextStyle(color: Theme.of(context).textTheme.headline6!.color),
+        : Theme(
+      data: Theme.of(context).copyWith(
+        appBarTheme: AppBarTheme(
+          iconTheme: IconThemeData(color: textColor), // Set the color of the back button to black
         ),
-        actions: [
+      ),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: backgroundColor,
+          title: Text(
+            userData["username"] != null ? userData["username"] : "username",
+            style: TextStyle(color: textColor),
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/mobileScreenLayout');
+            },
+          ),    actions: [
           if (FirebaseAuth.instance.currentUser!.uid == widget.uid)
             IconButton(
               icon: Icon(Icons.edit),
-              color: Theme.of(context).textTheme.headline6!.color,
+              color: textColor,
               onPressed: () {
                 showEditProfileDialog(context);
               },
             ),
           IconButton(
             icon: Icon(Icons.photo),
-            color: Theme.of(context).textTheme.headline6!.color,
+            color: textColor,
             onPressed: () {
               showChangeProfilePictureDialog(context);
             },
           ),
         ],
-      ),
-      body: ListView(
+        ),      body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.all(16),
@@ -206,7 +226,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     CircleAvatar(
                       radius: 48,
-                      backgroundColor: Colors.grey,
+                      backgroundColor: backgroundColor,
                       backgroundImage: NetworkImage(userData["photourl"]),
                     ),
                     Expanded(
@@ -217,18 +237,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
-                              buildStatColumn(postLen, "Posts"),
-                              buildStatColumn(followers, "Followers"),
-                              buildStatColumn(following, "Following"),
+                              buildStatColumn(postLen, "Posts", textColor),
+                              buildStatColumn(followers, "Followers", textColor),
+                              buildStatColumn(following, "Following", textColor),
+
                             ],
                           ),
                           FirebaseAuth.instance.currentUser!.uid == widget.uid
                               ? FollowButton(
-                            backgroundColor: Theme.of(context).backgroundColor,
-                            borderColor: Colors.grey,
+                            backgroundColor: backgroundColor,
+                            borderColor: textColor,
                             text: "Sign Out",
                             //textColor: Theme.of(context).textTheme.headline6!.color,
-                            textColor: Theme.of(context).textTheme.headline6?.color ?? Colors.black,
+                            textColor: textColor,
                             function: () async {
                               await AuthMethods().signOut();
                               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => LoginScreen()));
@@ -236,8 +257,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           )
                               : isfollowing
                               ? FollowButton(
-                            backgroundColor: Colors.white,
-                            borderColor: Colors.grey,
+                            backgroundColor: backgroundColor,
+                            borderColor: textColor,
                             text: "Unfollow",
                             textColor: Colors.black,
                             function: () async {
@@ -277,7 +298,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.only(top: 15),
                   child: Text(
                     userData["username"] != null ? userData["username"] : "username",
-                    style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).textTheme.headline6!.color),
+                    style: TextStyle(fontWeight: FontWeight.bold, color: textColor),
                   ),
                 ),
                 Container(
@@ -285,7 +306,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.only(top: 2),
                   child: Text(
                     userData["email"] != null ? userData["email"] : "email@gmail.com",
-                    style: TextStyle(color: Theme.of(context).textTheme.headline6!.color),
+                    style: TextStyle(color: textColor),
                   ),
                 ),
                 const Divider(),
@@ -322,10 +343,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
       ),
-    );
+      ),);
   }
 
   void showChangeProfilePictureDialog(BuildContext context) {
+    if (FirebaseAuth.instance.currentUser!.uid != widget.uid) {
+      // Only the user whose profile is being viewed can change their profile picture
+      showSnackBar("Error checking username availability:", context);
+
+      return;
+    }
+
     showDialog(
       context: context,
       builder: (context) {

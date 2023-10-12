@@ -12,6 +12,8 @@ class SplashScreen extends StatefulWidget{
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+
+
   @override
   void initState() {
 
@@ -27,6 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -36,7 +39,8 @@ class _SplashScreenState extends State<SplashScreen> {
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
 
-              colors: [Color(0xFFA5FF7A),Color(0xFF73F833),]
+              colors: [Color(0xFFA5FF7A),
+                Color(0xFF73F833),]
           ),
         ),
         child: Column(

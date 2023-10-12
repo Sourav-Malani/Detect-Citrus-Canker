@@ -103,6 +103,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor = isDarkMode ? Colors.black : Colors.white;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
+
     return Scaffold(
       appBar: AppBar(title: Text("Login")),
       body: SafeArea(
@@ -118,7 +122,7 @@ class _LoginScreenState extends State<LoginScreen> {
               style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black),
+                  color: textColor),
             ),
             const SizedBox(height: 25),
             TextFieldInput(

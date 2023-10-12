@@ -8,38 +8,45 @@ class User {
   final List followers;
   final List following;
 
-  const User(
-      {required this.email,
-        required this.uid,
-        required this.photoUrl,
-        required this.username,
-        required this.followers,
-        required this.following});
+  const User({
+    required this.email,
+    required this.uid,
+    required this.photoUrl,
+    required this.username,
+    required this.followers,
+    required this.following,
+  });
 
-
-  Map<String,dynamic> toJson() =>{
-    "username" : username,
-    "uid":uid,
-    "photourl":photoUrl,
-    "email":email,
-    "followers":followers,
-    "following":following
-
+  Map<String, dynamic> toJson() => {
+    "username": username,
+    "uid": uid,
+    "photourl": photoUrl,
+    "email": email,
+    "followers": followers,
+    "following": following,
   };
 
-  static User fromSnap(DocumentSnapshot snap){
-    var snapshot = snap.data() as Map<String,dynamic> ;
-
+  User copyWith({String? username}) {
     return User(
-        email: snapshot["email"],
-        uid: snapshot["uid"],
-        photoUrl: snapshot["photourl"],
-        username :snapshot["username"],
-        followers: snapshot["followers"],
-        following: snapshot["following"]
-
+      email: this.email,
+      uid: this.uid,
+      photoUrl: this.photoUrl,
+      username: username ?? this.username,
+      followers: this.followers,
+      following: this.following,
     );
   }
 
+  static User fromSnap(DocumentSnapshot snap) {
+    var snapshot = snap.data() as Map<String, dynamic>;
 
+    return User(
+      email: snapshot["email"],
+      uid: snapshot["uid"],
+      photoUrl: snapshot["photourl"],
+      username: snapshot["username"],
+      followers: snapshot["followers"],
+      following: snapshot["following"],
+    );
+  }
 }

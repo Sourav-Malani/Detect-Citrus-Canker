@@ -89,6 +89,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor = isDarkMode ? Colors.black : Colors.white;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
+
     return Scaffold(
       body: SafeArea(
           child: Container(
@@ -103,7 +107,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black),
+                  color: textColor),
             ),
             const SizedBox(height: 24),
             Stack(children: [

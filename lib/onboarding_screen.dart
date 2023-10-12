@@ -1,8 +1,6 @@
 import 'package:canker_detect/Community3/screens/login_screen.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
-//import 'signin_page.dart';
-//import 'package:canker_detect/main.dart';
 
 import 'package:easy_localization/easy_localization.dart';
 
@@ -19,11 +17,15 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor = isDarkMode ? Colors.black : Colors.white;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
+
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: backgroundColor,
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.white,
+        backgroundColor: backgroundColor,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 20, top: 20),
@@ -31,11 +33,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               onTap: () {
                 Navigator.pushReplacement(
                     context, MaterialPageRoute(builder: (_) => LoginScreen()));
-              }, //to login screen. We will update later
-              child: const Text(
+              },
+              child: Text(
                 'Skip',
                 style: TextStyle(
-                  color: Colors.grey,
+                  color: textColor,
                   fontSize: 16.0,
                   fontWeight: FontWeight.w400,
                 ),
@@ -59,16 +61,21 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 image: 'assets/images/community.png',
                 title: "Onboarding-titleOne".tr(),
                 description: "Onboarding-titleOneDesc".tr(),
+                titleColor: textColor, // Set the title color here
               ),
               createPage(
                 image: 'assets/images/plant_two.png',
                 title: "Onboarding-titleTwo".tr(),
                 description: "Onboarding-titleTwoDesc".tr(),
+                titleColor: textColor, // Set the title color here
+
               ),
               createPage(
                 image: 'assets/images/weather.png',
                 title: "Onboarding-titleThree".tr(),
                 description: "Onboarding-titleThreeDesc".tr(),
+                titleColor: textColor, // Set the title color here
+
               ),
             ],
           ),
@@ -116,9 +123,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-  //Extra Widgets
-
-  //Create the indicator decorations widget
   Widget _indicator(bool isActive) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
@@ -132,7 +136,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 
-//Create the indicator list
   List<Widget> _buildIndicator() {
     List<Widget> indicators = [];
 
@@ -152,12 +155,14 @@ class createPage extends StatelessWidget {
   final String image;
   final String title;
   final String description;
+  final Color titleColor;
 
   const createPage({
     Key? key,
     required this.image,
     required this.title,
     required this.description,
+    required this.titleColor,
   }) : super(key: key);
 
   @override
@@ -178,7 +183,7 @@ class createPage extends StatelessWidget {
             title,
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: Constants.primaryColor,
+              color: titleColor,
               fontSize: 30,
               fontWeight: FontWeight.bold,
             ),

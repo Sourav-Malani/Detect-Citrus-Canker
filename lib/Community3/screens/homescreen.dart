@@ -67,6 +67,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false, // This line removes the back icon
         title: const Text("Homepage"),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
