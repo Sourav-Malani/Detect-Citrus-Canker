@@ -2,7 +2,7 @@ name: Flutter CI
 
 on:
   push:
-    branches: [main]
+    branches: [master]
 jobs:
   version:
     name: Create version number
