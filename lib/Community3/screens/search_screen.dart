@@ -22,9 +22,12 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor = isDarkMode ? Colors.black : Colors.white;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: mobileBackgroundColor,
+          backgroundColor: backgroundColor,
           title: TextFormField(
             controller: searchController,
             decoration: const InputDecoration(labelText: "Search for user"),

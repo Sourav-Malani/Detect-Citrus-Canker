@@ -16,6 +16,9 @@ class CommentCard extends StatefulWidget {
 class _CommentCardState extends State<CommentCard> {
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor = isDarkMode ? Colors.black : Colors.white;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
     // ignore: unused_local_variable
     final User? user = Provider.of<UserProvider>(context).getUser;
     return Container(
@@ -37,11 +40,11 @@ class _CommentCardState extends State<CommentCard> {
                   TextSpan(
                     text: widget.snap['name'],
                     style: TextStyle(
-                        fontWeight: FontWeight.bold, color: Colors.black),
+                        fontWeight: FontWeight.bold, color: textColor),
                   ),
                   TextSpan(
                     text: ' ${widget.snap['text']}',
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: textColor),
                   )
                 ])),
                 Padding(

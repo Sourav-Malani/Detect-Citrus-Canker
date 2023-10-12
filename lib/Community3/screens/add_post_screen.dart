@@ -10,6 +10,7 @@ import 'package:canker_detect/Community3/resources/user.dart';
 import 'package:canker_detect/utils/colors.dart';
 //import 'package:canker_detect/utils/utils.dart';
 import 'package:provider/provider.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class AddPostScreen extends StatefulWidget {
   @override
@@ -43,7 +44,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
         clearImage();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text("Posted"),
+            content: Text("Posted_text".tr()),
           ),
         );
       } else {
@@ -78,11 +79,11 @@ class _AddPostScreenState extends State<AddPostScreen> {
       context: context,
       builder: (context) {
         return SimpleDialog(
-          title: const Text("Create a post"),
+          title:  Text("CreatePost_text".tr()),
           children: [
             SimpleDialogOption(
               padding: const EdgeInsets.all(20),
-              child: const Text("Take a photo"),
+              child: Text( "TakePhoto_text".tr()),
               onPressed: () async {
                 Navigator.of(context).pop();
                 final XFile? image = await ImagePicker().pickImage(source: ImageSource.camera);
@@ -95,7 +96,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ),
             SimpleDialogOption(
               padding: const EdgeInsets.all(20),
-              child: const Text("Choose from gallery"),
+              child:  Text("ChooseGallery-text".tr()),
               onPressed: () async {
                 Navigator.of(context).pop();
                 final XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -108,7 +109,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
             ),
             SimpleDialogOption(
               padding: const EdgeInsets.all(20),
-              child: const Text("Detect"),
+              child:  Text("Detect_Text".tr()),
               onPressed: () {
                 Navigator.push(
                   context,
@@ -147,14 +148,14 @@ class _AddPostScreenState extends State<AddPostScreen> {
           icon: const Icon(Icons.arrow_back),
           onPressed: clearImage,
         ),
-        title: const Text("Post to"),
+        title:  Text("PostTo_text".tr()),
         centerTitle: false,
         actions: [
           TextButton(
               onPressed: () =>
                   postImage(user!.uid, user.username, user.photoUrl),
-              child: const Text(
-                "Post",
+              child: Text(
+                "Post_Text".tr(),
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Colors.blueAccent,
@@ -178,7 +179,7 @@ class _AddPostScreenState extends State<AddPostScreen> {
               child: TextField(
                 controller: _descriptionController,
                 decoration: InputDecoration(
-                  hintText: "Write a caption..",
+                  hintText: "CaptionText".tr(),
                   border: InputBorder.none,
                 ),
                 maxLines: 8,

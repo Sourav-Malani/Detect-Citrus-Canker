@@ -53,9 +53,11 @@ class _PostCardState extends State<PostCard> {
   @override
   Widget build(BuildContext context) {
     final User? user = Provider.of<UserProvider>(context).getUser;
-
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final backgroundColor = isDarkMode ? Colors.black : Colors.white;
+    final textColor = isDarkMode ? Colors.white : Colors.black;
     return Container(
-      color: mobileBackgroundColor,
+      color: backgroundColor,
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [
@@ -77,6 +79,7 @@ class _PostCardState extends State<PostCard> {
                         Text(widget.snap["username"],
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
+                              color: textColor
                             )),
                       ],
                     ),
@@ -86,7 +89,7 @@ class _PostCardState extends State<PostCard> {
                   onPressed: () {
                     // Check if the current user is the owner of the post
 
-                    if (widget.snap["username"] == user?.username) {
+                    if (widget.snap["uid"] == user?.uid) {
                       showDialog(
                         context: context,
                         builder: (context) => Dialog(
@@ -98,7 +101,7 @@ class _PostCardState extends State<PostCard> {
                                   (e) => InkWell(
                                 onTap: () async {
                                   // Check again if the current user is the owner before deleting
-                                  if (widget.snap["username"] == user?.username) {
+                                  if (widget.snap["uid"] == user?.uid) {
                                     FirestoreMethod().deletePost(widget.snap["postId"]);
                                     Navigator.of(context).pop();
                                   } else {
@@ -207,9 +210,14 @@ class _PostCardState extends State<PostCard> {
                         .textTheme
                         .subtitle2!
                         .copyWith(fontWeight: FontWeight.w800),
+
                     child: Text(
                       '${widget.snap["likes"].length} likes',
-                      style: Theme.of(context).textTheme.bodyText2,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: textColor
+                      ),
+
                     ),
                   ),
                 )
