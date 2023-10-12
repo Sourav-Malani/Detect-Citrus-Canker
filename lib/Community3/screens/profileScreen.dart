@@ -379,6 +379,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   final pickedImage = await ImagePicker().getImage(source: ImageSource.camera);
                   if (pickedImage != null) {
                     // Same logic as above for uploading and updating
+                    File imageFile = File(pickedImage.path);
+                    String fileName = "${widget.uid}_${DateTime.now().millisecondsSinceEpoch}.jpg";
+                    final Reference storageReference = FirebaseStorage.instance.ref().child('profile_images/$fileName');
+
+                    await storageReference.putFile(imageFile);
+
+                    final String downloadURL = await storageReference.getDownloadURL();
+
+                    setState(() {
+                      userData["photourl"] = downloadURL;
+                    });
+
+                    await FirebaseFirestore.instance.collection("users").doc(widget.uid).update({
+                      "photourl": downloadURL,
+                    });
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Profile picture updated successfully."),
+                      ),
+                    );
                   }
                 },
                 child: Text("Take a Photo"),
