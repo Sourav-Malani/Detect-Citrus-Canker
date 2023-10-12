@@ -29,9 +29,12 @@ flutter run
 
 
 ## Screenshots
-![Multi-Lingual](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/e1de6fdd-456c-499d-b85c-20282b1f3d10)
-![Model Integration](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/67a50a34-aec5-46e6-a21f-316d1f275e4e)
-![Weather](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/28b912af-4d78-47b1-90db-3de61608f023)
+![Multi-Lingual](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/98fbb276-1b16-4b9a-8339-f4a552e9484c)
+![Model Integration](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/b6a3622d-0433-4632-9357-d3e06425dc9f)
+![Weather](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/984454b6-9d60-4ddd-8e4f-a0fe8e0543f2)
+![Community](https://github.com/Sourav-Malani/Detect-Citrus-Canker/assets/74541281/a7582929-afb2-49e5-a689-a1b77ea57f67)
+
+
 
 If you encounter any errors, please feel free to contact me at souravmalani95@gmail.com or i190434@nu.edu.pk.
 
