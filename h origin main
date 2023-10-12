@@ -1,0 +1,500 @@
+[33mcommit 1e6b6d0031eebf35f538889a2a5a3546c679a3bb[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Merge: 805f43c b62efe8
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Thu Oct 12 00:26:49 2023 +0500
+
+    Resolved conflicts
+
+[33mcommit 805f43cf8be38e358d0b65015261731b1a5139ee[m
+Merge: 4844bf9 765deee
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Thu Oct 12 00:23:30 2023 +0500
+
+    added keystore file
+
+[33mcommit b62efe80f4c89c0ff4e48fc8d9fb6929eefdbfc5[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Thu Oct 12 00:16:53 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 4844bf954f6f9313d664736ab0f264f5d15af5f1[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Thu Oct 12 00:14:42 2023 +0500
+
+    added keystore file
+
+[33mcommit 765deeeadec366b9f0b22af46868db764f74defa[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Wed Oct 11 23:49:17 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 92f54218ba63d099128bcd0cc3502adee421092c[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Wed Oct 11 23:42:16 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 9b36b7826f099b1e7c4f185f9ebedd78360847c9[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Wed Oct 11 20:44:39 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 0fdc4cf6284222b3bed963900bd5169b6eb9f98e[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Wed Oct 11 20:42:59 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 3349e0ede3b45fa12f218fa0a4504d7a8726e5e8[m
+Author: masroor10 <102370535+masroor10@users.noreply.github.com>
+Date:   Wed Oct 11 20:14:35 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 951e21c74c5292f8df06417a3cdd7238bd38fd8c[m
+Author: masroor10 <102370535+masroor10@users.noreply.github.com>
+Date:   Wed Oct 11 20:12:13 2023 +0500
+
+    Update dart.yml
+
+[33mcommit e456b7135522caf4b1d86b793806584d41fb4c3a[m
+Author: masroor10 <masroorahmedfcb@gmail.com>
+Date:   Wed Oct 11 19:29:37 2023 +0500
+
+    changed community bugs
+
+[33mcommit 72e07f53c4169b8136f14d7cb4748efefeec1e4e[m
+Merge: e162600 b393c59
+Author: masroor10 <masroorahmedfcb@gmail.com>
+Date:   Wed Oct 11 15:25:13 2023 +0500
+
+    Merge branch 'main' of https://github.com/Sourav-Malani/Detect-Citrus-Canker
+
+[33mcommit e1626004dc65f01d99aad9881766d62630ebf1c9[m
+Author: masroor10 <masroorahmedfcb@gmail.com>
+Date:   Wed Oct 11 15:16:44 2023 +0500
+
+    updated translations files as well as other including profile,login,signup,homescreen
+
+[33mcommit b393c5998976c7b06c24ddbed11c21d494d34529[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Wed Oct 11 13:53:43 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 556de2dd5fcd5aaa6e1f1988803221c20f79e320[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Wed Oct 11 08:48:01 2023 +0500
+
+    Update dart.yml
+
+[33mcommit afde1e2972c20ce2f889ab1f1068754a790a01b8[m[33m ([m[1;33mtag: v0.0.2[m[33m)[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 11:11:39 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 08a0c8583a16f61323a3d40424a4a8e9a91c0093[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 10:56:41 2023 +0500
+
+    Update dart.yml
+
+[33mcommit fef3298bd5dba5eeb3ec0e26f38e06e743550aa2[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Tue Oct 10 10:47:55 2023 +0500
+
+    Final
+
+[33mcommit 983281e47fe895210b6bc6f14c0632ec92922b88[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 09:39:16 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 19e2df618a3e6160e520dd1e0bc2671e106c15f6[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 09:12:28 2023 +0500
+
+    Update plant_recogniser.dart
+
+[33mcommit c9086f6a6bce88490ee62e77f6c37f1f68be5143[m[33m ([m[1;33mtag: v0.0.1[m[33m)[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 03:35:58 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 8313814051cd109a058cafad77dab02c2e264eef[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 03:23:51 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 838f75d794ff99cd4f3196500124f6e0f4b65826[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 03:20:17 2023 +0500
+
+    Update pubspec.yaml
+
+[33mcommit 303ab7fd211970dbf2d2b7be1c1fca4f2a972c34[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 03:19:55 2023 +0500
+
+    Update pubspec.yaml
+
+[33mcommit 832c5f7c79f672089a666fabfb0eb22457991028[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 03:18:46 2023 +0500
+
+    Update dart.yml
+
+[33mcommit e19bdfa12b3cc63a837b6dce5b966200887df891[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 03:09:53 2023 +0500
+
+    Update pubspec.yaml
+
+[33mcommit 62203eafc3ed63259372f6aed286779dd500cd39[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 03:02:12 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 8729c8a9bcb337dedb18712937142373093b6a6a[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:57:07 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 8c1c522ab047f08561bc90a3519ad4cea1c8172b[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:53:36 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 4795281865e1fc0a3928a460f638428e896ce9d9[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:49:03 2023 +0500
+
+    Update dart.yml
+
+[33mcommit a99f737331bb2915226124f0e67cfa89cd2d97c2[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:44:48 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 1b9085e62a5f4871ad50d0d4190910d7e18eed6f[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:41:47 2023 +0500
+
+    Update dart.yml
+
+[33mcommit a1a8904c6a2df2040db81df27038c2b61f9e231b[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:36:24 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 883c0d3796ee1ac2a1a39ea2e43639a15141c061[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:34:14 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 9a0b1695298bef35d1883f64d24be857337b578e[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:32:03 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 842868672ca4f43c640145bf41fb32dc51bba30e[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:17:19 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 3bb03853af098764d910f2538022bc994cd9ad6e[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:15:56 2023 +0500
+
+    Update dart.yml
+
+[33mcommit c8cb54333707959368a863b5cb39b08edb299514[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:12:08 2023 +0500
+
+    Update dart.yml
+
+[33mcommit b827a00a60ced4126926a247c8a8beefc83ff132[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:09:28 2023 +0500
+
+    Update dart.yml
+
+[33mcommit a614179c84737631b5d7b02ae743d734804e1f95[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:04:59 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 843e93c49869a932fa191c936f26f49f3dc0d4e7[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 02:02:00 2023 +0500
+
+    Update dart.yml
+
+[33mcommit d250e08478d9d8460862c12e5108ef014809ee56[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 01:55:45 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 074df8778ae28941a7fe4f5be1daea0e42612f2c[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 01:54:02 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 55c97934ef59eed318f332c1a9a18fe669c28d9e[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 01:50:01 2023 +0500
+
+    Update dart.yml
+
+[33mcommit c903f5e0c95aa95cf118ed5d3e733b7e4e0251f5[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 01:47:43 2023 +0500
+
+    Update dart.yml
+
+[33mcommit cb241e4e77989788262fdd137a8e86ba3566df84[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 01:42:50 2023 +0500
+
+    Update dart.yml
+
+[33mcommit ceae7b8e55471cb62a1495f28a6f27b27bafc563[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 01:39:39 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 6b5658ac0fd43908496902928b6ad4674ce04af6[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 01:36:19 2023 +0500
+
+    Update dart.yml
+
+[33mcommit ac83b80d719152bf4758e093d65e6bb87d7759da[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 01:28:28 2023 +0500
+
+    Update dart.yml
+
+[33mcommit e8f570846028dd9e90240e434bacba55a9b36ad4[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 01:26:41 2023 +0500
+
+    Update dart.yml
+
+[33mcommit ec9ff1f7e0a5f407ddb83e403bd4fd8fe8bfba09[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 10 01:12:54 2023 +0500
+
+    Update dart.yml
+
+[33mcommit 98b40042b05ea6eb56ab60848c761170dabefd01[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Mon Oct 9 22:01:02 2023 +0500
+
+    Update dart.yml
+
+[33mcommit f02e37486164d7f06018370fcfdc492f06373907[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Mon Oct 9 21:59:08 2023 +0500
+
+    Create dart.yml
+
+[33mcommit 377d63a45b06b73e48eeac6c4472e8d4f41bed1b[m[33m ([m[1;33mtag: v0.6-alpha[m[33m)[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Wed Oct 4 02:34:37 2023 +0500
+
+    dark mode
+
+[33mcommit 446d966069dca21ebd1c54821d051453bf3c3af9[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Wed Oct 4 02:15:10 2023 +0500
+
+    added recommendations
+
+[33mcommit 1df42199c9b176d8e75f919a992241ae2de84c19[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Wed Oct 4 01:54:17 2023 +0500
+
+    added recommendations page
+
+[33mcommit 75096ea305d9137bbc2b2e34155222e39beb860b[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Tue Oct 3 21:13:09 2023 +0500
+
+    Untracked install.bat
+
+[33mcommit 991c810a61b05250f5056744a18eb94c2cb020ed[m
+Merge: 48d4358 6d8bfa5
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Tue Oct 3 21:05:59 2023 +0500
+
+    Merge branch 'main' of https://github.com/Sourav-Malani/Detect-Citrus-Canker
+
+[33mcommit 48d43580917d68381ea13c7b3ac675257e14f455[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Tue Oct 3 21:05:30 2023 +0500
+
+    Added forgot password screen
+
+[33mcommit 6d8bfa52d6fbbffd8d8ca111b7150abe0a5f407b[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Oct 3 02:45:21 2023 +0500
+
+    Update .gitignore
+
+[33mcommit e526e8c42c3b71c5503df95165daa1c8e58ba069[m[33m ([m[1;33mtag: v0.5[m[33m)[m
+Merge: 7995e2a a3c2bb8
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Tue Oct 3 02:40:45 2023 +0500
+
+    Merge branch 'main' of https://github.com/Sourav-Malani/Detect-Citrus-Canker
+
+[33mcommit 7995e2aded8820beb543986088de09445a221b1c[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Tue Oct 3 02:30:50 2023 +0500
+
+    Added new Model
+
+[33mcommit a3c2bb8ff16cf358d085bdc9552ff4b4f977567d[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Fri Sep 29 00:03:48 2023 +0500
+
+    Update README.md
+
+[33mcommit f52245f117d31edf789eeb396c76f128404035d8[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Thu Sep 28 23:57:25 2023 +0500
+
+    Update README.md
+
+[33mcommit 99d3600ec9dad6a4650fd968b008cde746c7a854[m[33m ([m[1;33mtag: v0.4[m[33m)[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Thu Sep 21 01:03:27 2023 +0500
+
+    Updated README.md
+
+[33mcommit 172dc8ac85038299d24c0fe1941242ec3934cfa3[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Thu Sep 21 00:40:32 2023 +0500
+
+    null saftey bug fixes
+
+[33mcommit 152244da93979357fc8f55a27d329f14e48c0502[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Wed Sep 20 23:49:36 2023 +0500
+
+    Bug fixes
+
+[33mcommit 137319573b35ad472d6c05363e98e21d41dbd5b7[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Tue Sep 19 01:24:02 2023 +0500
+
+    reduced the apk size
+
+[33mcommit 2d9475806c0842d77eb80b345542a150af2ef10d[m[33m ([m[1;33mtag: v0.3[m[33m)[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Mon Sep 18 23:59:27 2023 +0500
+
+    Added new weather feature
+
+[33mcommit 9e0811d759a0d87548a63407cb8c2936b2e65df6[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Sun Sep 17 18:23:15 2023 +0500
+
+    Modified the language selection screen
+
+[33mcommit 787b9026c8745d418b0e829eea737b19545cc141[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Mon Sep 11 22:26:56 2023 +0500
+
+    Update README.md
+
+[33mcommit 6f2ee43a2350ccfb423b4491f6da2d64361fb3bb[m[33m ([m[1;33mtag: v0.2[m[33m)[m
+Author: Sourav Malani <i190434@nu.edu.pk>
+Date:   Mon Sep 11 22:18:55 2023 +0500
+
+    added new code, All files updated
+
+[33mcommit 2819a35739b49e61c50cbf0a15eba0dc26b2d9e6[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Mon Sep 11 22:10:01 2023 +0500
+
+    Delete lib directory
+
+[33mcommit 004ba6c56c368588b49fe191bd9f17493548cd07[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Mon Sep 11 22:09:44 2023 +0500
+
+    Delete assets directory
+
+[33mcommit 2c054718fb3b1a72afbbfd7aae2888d0d8180734[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Thu Jun 15 17:31:08 2023 +0500
+
+    Update README.md
+
+[33mcommit 4f154373e5bae277d5c54f3be9e70bcac1d82d6d[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Thu Jun 15 17:30:10 2023 +0500
+
+    Update README.md
+
+[33mcommit d67bdc6a865855fa075651487520d6f7ac1bfaa6[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Thu Jun 15 17:28:41 2023 +0500
+
+    Update README.md
+    
+    Added 3 screenshots
+
+[33mcommit d0ba18aaa9aa97b9e57dcda4bf17a30f86742562[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Thu Jun 15 17:26:26 2023 +0500
+
+    Update README.md
+
+[33mcommit 8a461d3a2233a1c5615d705fc676a5f927aefb28[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Thu Jun 15 17:23:28 2023 +0500
+
+    Update README.md
+    
+    added an screenshot
+
+[33mcommit a998421ef0093cf6c6b517800e20383a90fdd6e8[m[33m ([m[1;33mtag: v0.1[m[33m)[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Jun 13 11:58:38 2023 +0500
+
+    Update README.md
+
+[33mcommit 9601e2af496ebffeb784d4bd220acd2d27412cfc[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Tue Jun 13 11:55:49 2023 +0500
+
+    First Commit
+
+[33mcommit 80a381fac6e6269ddee838086ff85dcda47e8324[m
+Author: Sourav Malani <74541281+Sourav-Malani@users.noreply.github.com>
+Date:   Mon Jun 12 23:22:50 2023 +0500
+
+    Initial commit

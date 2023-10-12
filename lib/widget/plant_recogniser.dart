@@ -253,8 +253,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
         if (_resultStatus == _ResultStatus.found)
           Text(accuracyLabel, style: kResultRatingTextStyle),
         SizedBox(height: 20),
-        if (_resultStatus == _ResultStatus.found &&
-            _plantLabel != "Fail to recognize" && title!="Fail to recognize")
+        if (_resultStatus == _ResultStatus.found ||
+            _plantLabel != "Fail to recognize" || title!="Fail to recognize")
           GestureDetector(
             onTap: _navigateToRecommendationsPage,
             child: Container(
