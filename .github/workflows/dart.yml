@@ -58,8 +58,8 @@ jobs:
           channel: "beta"
       - run: flutter clean
       - run: flutter pub get
-      - run: flutter build apk --release --split-per-abi
-      - run: flutter build appbundle --release
+      - run: flutter build apk  --split-per-abi
+      # - run: flutter build appbundle --release
       - name: Create a Release in GitHub
         uses: ncipollo/release-action@v1
         with:
