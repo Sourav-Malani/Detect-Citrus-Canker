@@ -11,6 +11,7 @@ import 'package:canker_detect/Community3/widgets/text_field_input.dart';
 import '../responsive/mobilescreenlayout.dart';
 import '../responsive/responsive_layout_screen.dart';
 import '../../utils/utils.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class SignUpScreen extends StatefulWidget {
   @override
@@ -57,7 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         isLoading = false;
       });
       showSnackBar(
-          "Please fill in all the fields and select an image.", context);
+          "SignupEmptyFieldsError".tr(), context);
       return; // Exit the function early
     }
 
@@ -129,18 +130,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
             const SizedBox(height: 24),
             TextFieldInput(
               textEditingController: _usernameController,
-              hintText: "Username",
+              hintText: "UsernameSignup".tr(),
               textInputType: TextInputType.visiblePassword,
             ),
             const SizedBox(height: 24),
             TextFieldInput(
                 textEditingController: _emailController,
-                hintText: "Enter your email",
+                hintText: "Email-text".tr(),
                 textInputType: TextInputType.emailAddress),
             const SizedBox(height: 24),
             TextFieldInput(
               textEditingController: _passwordController,
-              hintText: "Password",
+              hintText: "Password-text".tr(),
               textInputType: TextInputType.visiblePassword,
               ispass: true,
             ),
@@ -150,7 +151,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               child: isLoading
                   ? Center(child: CircularProgressIndicator())
                   : Container(
-                      child: const Text("Sign Up"),
+                      child:  Text("SignUp_text".tr()),
                       width: double.infinity,
                       alignment: Alignment.center,
                       padding: const EdgeInsets.symmetric(vertical: 15),
@@ -165,7 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
-                  child: const Text("Have an account"),
+                  child:  Text("HaveAnAccount_text".tr()),
                   padding: const EdgeInsets.symmetric(vertical: 8),
                 ),
                 const SizedBox(
@@ -174,8 +175,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 GestureDetector(
                   onTap: navigatetologin,
                   child: Container(
-                    child: const Text(
-                      "Login",
+                    child:  Text(
+                      "Login_text".tr(),
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
                     ),

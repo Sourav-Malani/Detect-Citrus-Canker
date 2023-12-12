@@ -11,7 +11,9 @@ import 'package:image_picker/image_picker.dart';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'dart:io';
-
+import 'package:easy_localization/easy_localization.dart';
+import 'package:canker_detect/Community3/providers/user_providers.dart';
+import 'package:provider/provider.dart';
 
 
 class ProfileScreen extends StatefulWidget {
@@ -21,9 +23,12 @@ class ProfileScreen extends StatefulWidget {
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
+
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  late UserProvider userProvider ;
+
   var userData = {};
   int postLen = 0;
   int followers = 0;
@@ -34,6 +39,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
+    userProvider = Provider.of<UserProvider>(context, listen: false);
     print("Current User UID: ${FirebaseAuth.instance.currentUser!.uid}");
     super.initState();
     getData();
@@ -78,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       await FirebaseFirestore.instance.collection("users").doc(widget.uid).update({
         "username": newUsername,
       });
-
+      userProvider.updateUsername(newUsername);
       setState(() {
         userData["username"] = newUsername;
       });
@@ -226,7 +232,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ? FollowButton(
                             backgroundColor: Theme.of(context).backgroundColor,
                             borderColor: Colors.grey,
-                            text: "Sign Out",
+                            text: "Sign Out".tr(),
                             //textColor: Theme.of(context).textTheme.headline6!.color,
                             textColor: Theme.of(context).textTheme.headline6?.color ?? Colors.black,
                             function: () async {
@@ -373,6 +379,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   final pickedImage = await ImagePicker().getImage(source: ImageSource.camera);
                   if (pickedImage != null) {
                     // Same logic as above for uploading and updating
+                    File imageFile = File(pickedImage.path);
+                    String fileName = "${widget.uid}_${DateTime.now().millisecondsSinceEpoch}.jpg";
+                    final Reference storageReference = FirebaseStorage.instance.ref().child('profile_images/$fileName');
+
+                    await storageReference.putFile(imageFile);
+
+                    final String downloadURL = await storageReference.getDownloadURL();
+
+                    setState(() {
+                      userData["photourl"] = downloadURL;
+                    });
+
+                    await FirebaseFirestore.instance.collection("users").doc(widget.uid).update({
+                      "photourl": downloadURL,
+                    });
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text("Profile picture updated successfully."),
+                      ),
+                    );
                   }
                 },
                 child: Text("Take a Photo"),

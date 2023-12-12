@@ -50,18 +50,29 @@ class _SearchScreenState extends State<SearchScreen> {
               }
 
               return ListView.builder(
-                  itemCount: snapshot.data!.docs.length,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: ()=>Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileScreen(uid: snapshot.data!.docs[index]["uid"]))),
-                      child: ListTile(
-                        leading: CircleAvatar(
-                            backgroundImage: NetworkImage(
-                                snapshot.data!.docs[index]["photourl"])),
-                        title: Text((snapshot.data!.docs[index]["username"])),
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  final documentData = snapshot.data!.docs[index].data();
+                  final username = documentData["username"] ?? "N/A"; // Provide a default value if the field is not present
+                  final photoUrl = documentData["photourl"] ?? "default_url_here"; // Provide a default URL if the field is not present
+
+                  return InkWell(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProfileScreen(uid: documentData["uid"]),
                       ),
-                    );
-                  });
+                    ),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(photoUrl),
+                      ),
+                      title: Text(username),
+                    ),
+                  );
+                },
+              );
+
             })
             : FutureBuilder(
             future: FirebaseFirestore.instance.collection("post").get(),

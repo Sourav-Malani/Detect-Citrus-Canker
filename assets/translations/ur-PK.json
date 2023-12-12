@@ -38,7 +38,31 @@
     "LogOut_text": "لاگ آوٹ",
     "Gallery_text": "گیلری",
     "Weather_text" : "موسم",
-    "Camera_text": "کیمرہ"
+    "Camera_text": "کیمرہ",
+    "OOPS_Text": "افوہ...",
+    "IncorrectPassEmail_Text":"غلط ای میل یا پاس ورڈ. دوبارہ کوشش کریں.",
+    "InvalidPassword":"پاس ورڈ غلط ہے۔",
+    "SignupEmptyFieldsError":"براہ کرم تمام شعبوں کو پُر کریں اور ایک تصویر منتخب کریں۔",
+    "UsernameSignup":"صارف نام",
+    "Posted_text":"پوسٹ کیا گیا",
+    "CreatePost_text":"ایک پوسٹ بنائیں",
+    "TakePhoto_text": "ایک تصویر لے لو",
+    "ChooseGallery-text": "گیلری سے انتخاب کریں۔",
+    "Detect_Text": "پتہ لگانا",
+    "PostTo_text":"پر پوسٹ کریں۔",
+    "Post_Text" : "پوسٹ",
+    "CaptionText" :"ایک کیپشن لکھیں..",
+    "Instructions": "ہدایات",
+    "Features":"خصوصیات",
+    "Check Weather": "موسم کی جانچ کریں۔",
+    "Detect Canker": "کینکر کا پتہ لگائیں۔",
+    "Citrus Canker Detection":"ھٹی کینکر کا پتہ لگانا",
+    "Treatment":"علاج",
+    "Fail to recognize": "پہچاننے میں ناکام",
+    "Citrus Canker Recommendations":"ھٹی کینکر کی سفارشات",
+    "1. Isolate the Infected Plant:": "1. متاثرہ پودے کو الگ کریں:",
+    "Move the infected plant away from healthy citrus trees to prevent the disease from spreading": "बीमारी को फैलने से रोकने के लिए संक्रमित पौधे को स्वस्थ खट्टे पेड़ों से दूर रखें।",
+    "Sign Out": "باہر جائیں"
 }
     
     

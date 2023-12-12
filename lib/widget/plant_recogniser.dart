@@ -6,6 +6,7 @@ import 'package:image_picker/image_picker.dart';
 import '../classifier/classifier.dart';
 import '../styles.dart';
 import 'plant_photo_view.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 const _labelsFileName = 'assets/labels_one.txt';
 const _modelFileName = 'model_unquant_one.tflite';
@@ -60,8 +61,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detect Canker"),
-        backgroundColor: Colors.green,
+        title: Text("CankerDetect".tr()),
+        backgroundColor: Colors.orangeAccent,
         leading: IconButton(
           icon: Icon(Icons.arrow_back), // Add the back button icon here
           onPressed: () {
@@ -91,11 +92,11 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
               _buildResultView(),
               const Spacer(flex: 5),
               _buildPickPhotoButton(
-                title: 'Take a photo',
+                title: 'TakePhoto_text'.tr(),
                 source: ImageSource.camera,
               ),
               _buildPickPhotoButton(
-                title: 'Pick from gallery',
+                title: 'ChooseGallery-text'.tr(),
                 source: ImageSource.gallery,
               ),
               const Spacer(),
@@ -233,7 +234,7 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     var title = '';
 
     if (_resultStatus == _ResultStatus.notFound) {
-      title = 'Fail to recognize';
+      title = "Fail to recognize".tr();
     } else if (_resultStatus == _ResultStatus.found) {
       title = _plantLabel;
     } else {
@@ -242,18 +243,18 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
 
     var accuracyLabel = '';
     if (_resultStatus == _ResultStatus.found) {
-      accuracyLabel =
-      'Probability: ${(_accuracy * 100).toStringAsFixed(2)}%';
+      accuracyLabel = 'Probability: ${(_accuracy * 100).toStringAsFixed(2)}%';
     }
 
     return Column(
       children: [
         Text(title, style: kResultTextStyle),
         SizedBox(height: 10),
-        if (title != 'Fail to recognize')
+        if (_resultStatus == _ResultStatus.found)
           Text(accuracyLabel, style: kResultRatingTextStyle),
         SizedBox(height: 20),
-        if (_resultStatus == _ResultStatus.found || title != 'Fail to recognize')
+        if (_resultStatus == _ResultStatus.found ||
+            _plantLabel != "Fail to recognize" || title!="Fail to recognize")
           GestureDetector(
             onTap: _navigateToRecommendationsPage,
             child: Container(
@@ -261,10 +262,17 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(50),
-                border: Border.all(color: Colors.greenAccent.withOpacity(0.7), width: 2), // Add a border with color
+                border: Border.all(
+                  color: Colors.greenAccent.withOpacity(0.7),
+                  width: 2,
+                ),
               ),
-              child: Center(child: Text('Treatment')),
-            ),          ),
+              child: Center(child: Text('Treatment'.tr(),style: TextStyle(
+                color: Colors.white, // Set text color to white
+                fontSize: 16, // You can adjust the font size as needed
+              ),),),
+            ),
+          ),
       ],
     );
   }
