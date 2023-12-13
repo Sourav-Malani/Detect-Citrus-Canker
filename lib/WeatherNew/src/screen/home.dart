@@ -51,6 +51,7 @@ class _HomeState extends State<Home> {
               fit: BoxFit.cover,
               alignment: _themeController.backgroundShift(),
             ),
+
             Scaffold(
               backgroundColor: Colors.transparent,
               appBar: AppBar(
@@ -72,7 +73,7 @@ class _HomeState extends State<Home> {
                     },
                   ),
                 ],
-                backgroundColor: Colors.transparent,
+                backgroundColor: Colors.green,
                 elevation: 0.0,
                 flexibleSpace: FlexibleSpaceBar(
                   expandedTitleScale: 1.6,

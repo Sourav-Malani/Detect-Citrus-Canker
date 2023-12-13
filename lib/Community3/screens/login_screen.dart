@@ -104,102 +104,133 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Login")),
+      appBar: AppBar(
+        title: Text("Login"),
+        backgroundColor: mobileBackgroundColor, // Replace with your app's theme color
+      ),
       body: SafeArea(
+        child: SingleChildScrollView(
           child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 32),
-        width: double.infinity,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              "CankerDetect",
-              style: TextStyle(
-                  fontSize: 25,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black),
-            ),
-            const SizedBox(height: 25),
-            TextFieldInput(
-                textEditingController: _emailController,
-                hintText: "Enter your email",
-                textInputType: TextInputType.emailAddress),
-            const SizedBox(height: 24),
-            TextFieldInput(
-              textEditingController: _passwordController,
-              hintText: "Password",
-              textInputType: TextInputType.visiblePassword,
-              ispass: true,
-            ),
-            const SizedBox(height: 24),
-            InkWell(
-              onTap: loginUser,
-              child: isloading
-                  ? Center(child: CircularProgressIndicator())
-                  : Container(
-                      child: Text("Log In"),
-                      width: double.infinity,
-                      alignment: Alignment.center,
-                      padding: const EdgeInsets.symmetric(vertical: 15),
-                      decoration: ShapeDecoration(
-                          color: blueColor,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4))),
-                    ),
-            ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+            padding: EdgeInsets.symmetric(horizontal: 32),
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Container(
-                  child: const Text("Dont have an account"),
-                  padding: const EdgeInsets.symmetric(vertical: 8),
+                SizedBox(height: 50), // Added space at the top
+                Image.asset(
+                  'assets/icon/icon.png', // Replace this with your image path
+                  height: 200, // Set the desired height
+                  width: 150, // Set the desired width
                 ),
-                const SizedBox(
-                  width: 12,
-                ),
-                GestureDetector(
-                  onTap: navigatetosignup,
-                  child: Container(
-                    child: const Text(
-                      "Sign Up",
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 8),
+                const SizedBox(height: 8), // Adjust spacing as needed
+                Text(
+                  "CankerDetect",
+                  style: TextStyle(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
+                ),
+                const SizedBox(height: 25),
+                TextField(
+                  controller: _emailController,
+                  decoration: InputDecoration(
+                    hintText: "Enter your email",
+                  ),
+                  keyboardType: TextInputType.emailAddress,
+                ),
+                const SizedBox(height: 24),
+                TextField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    hintText: "Password",
+                  ),
+                  obscureText: true,
+                ),
+                const SizedBox(height: 24),
+                InkWell(
+                  onTap: loginUser,
+                  child: isloading
+                      ? Center(child: CircularProgressIndicator())
+                      : Container(
+                    child: Text(
+                      "Log In",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    decoration: ShapeDecoration(
+                      color: mobileBackgroundColor, // Replace with your app's theme color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(45),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: const Text("Don't have an account",style: TextStyle(
+                        color: Colors.grey
+                      ),),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    GestureDetector(
+                      onTap: navigatetosignup,
+                      child: Container(
+                        child: const Text(
+                          "Sign Up",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: const Text("Forgot Password?",style: TextStyle(
+                        color: Colors.grey
+                      ),),
+                      padding: const EdgeInsets.symmetric(vertical: 8),
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    GestureDetector(
+                      onTap: navigatetoForgot,
+                      child: Container(
+                        child: const Text(
+                          "Reset here",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 8),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
-            const SizedBox(height: 12),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  child: const Text("Forgot Password?"),
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                ),
-                const SizedBox(
-                  width: 12,
-                ),
-                GestureDetector(
-                  onTap: navigatetoForgot,
-                  child: Container(
-                    child: const Text(
-                      "Reset here",
-                      style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
-                    ),
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                  ),
-                ),
-              ],
-            )
-
-          ],
+          ),
         ),
-      )),
+      ),
     );
   }
 }

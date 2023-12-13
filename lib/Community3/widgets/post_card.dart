@@ -55,7 +55,7 @@ class _PostCardState extends State<PostCard> {
     final User? user = Provider.of<UserProvider>(context).getUser;
 
     return Container(
-      color: mobileBackgroundColor,
+      color: Colors.white,
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: Column(
         children: [

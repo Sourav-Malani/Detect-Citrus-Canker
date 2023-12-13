@@ -94,6 +94,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
               child: Text(
                 "Instructions",
                 style: TextStyle(
+                  color: Colors.black,
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
                 ),
@@ -119,6 +120,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
               child: Text(
                 "Features",
                 style: TextStyle(
+                  color: Colors.black,
                   fontSize: 24.0,
                   fontWeight: FontWeight.bold,
                 ),

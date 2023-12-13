@@ -9,7 +9,7 @@ import '../styles.dart';
 import 'plant_photo_view.dart';
 
 const _labelsFileName = 'assets/labels_two.txt';
-const _modelFileName = 'model_unquant_two.tflite';
+const _modelFileName = 'model_unquant_one.tflite';
 
 class PlantRecogniser extends StatefulWidget {
   const PlantRecogniser({Key? key}) : super(key: key);
@@ -62,8 +62,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     return WillPopScope(
       onWillPop: () async {
         // Navigate back to the previous screen
-        Navigator.of(context).pop();
-        return true;
+        Navigator.pushReplacementNamed(context, '/mobileScreenLayout');
+        return false;
       },
       child: Scaffold(
         appBar: AppBar(
