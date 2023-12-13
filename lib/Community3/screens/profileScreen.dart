@@ -45,21 +45,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       isLoading = true;
     });
+
     try {
-      var userSnap =
-      await FirebaseFirestore.instance.collection("users").doc(widget.uid).get();
+      var userSnap = await FirebaseFirestore.instance.collection("users").doc(widget.uid).get();
       if (userSnap.exists) {
         setState(() {
-          userData = userSnap.data() ?? {}; // Update userData only if it's not null
+          userData = userSnap.data() ?? {};
         });
 
-        // Other setState calls for postLen, followers, following, etc.
+        var postsSnapshot = await FirebaseFirestore.instance.collection("post").where("uid", isEqualTo: widget.uid).get();
+        postLen = postsSnapshot.docs.length; // Update post count based on the user's posts
       } else {
         // Handle the case where userSnap doesn't exist
       }
     } catch (e) {
       showSnackBar(e.toString(), context);
     }
+
     setState(() {
       isLoading = false;
     });
