@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const kMainFont = 'Roboto';
 const kButtonFont = 'Roboto';
-const kDisplayFont = 'SquadaOne';
+const kDisplayFont = 'Roboto';
 
 const kColorGreen = Color(0xFFFFFFFF);
 const kColorLightGreen = Color(0XFF4E6C50);
@@ -15,8 +15,8 @@ const kColorLightGray = Color(0xFFDDDDDD);
 
 const kColorHunterGreen = Color(0xFF386641);
 const kColorMayGreen = Color(0xFF6a994e);
-const kColorAndroidGreen = Color(0xFFa7c957);
-const kColorEggshell = Color(0xFFf2e8cf);
+const kColorAndroidGreen = Color(0xff4cec22);
+const kColorEggshell = Color(0xfff1f1f1);
 const kColorBitterSweetShimmer = Color(0xFFbc4749);
 
 const kBgColor = kColorGreen;
@@ -37,7 +37,7 @@ const kAnalyzingTextStyle = TextStyle(
 const kResultTextStyle = TextStyle(
     fontFamily: kDisplayFont,
     fontSize: 35.0,
-    color: kColorLightYellow,
+    color: Colors.black,
     decoration: TextDecoration.none);
 
 const kResultRatingTextStyle = TextStyle(

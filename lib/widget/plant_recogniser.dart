@@ -60,47 +60,48 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-        onWillPop: () async {
-          // Navigate back to the previous screen
-          Navigator.of(context).pop();
-          return true;
-        },
-    child: Scaffold(
-      appBar: AppBar(
-        leading: Image.asset('assets/icon/icon.png',height:20,width:20),
-        backgroundColor: Colors.green,
-        title: Text("Detect Canker"),
-      ),
-      body: SafeArea(
-        child: Container(
-          color: kBgColor,
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              _buildTitle(),
-              SizedBox(height: 20),
-              _buildPhotolView(),
-              SizedBox(height: 10),
-              _buildResultView(),
-              Spacer(),
-              _buildPickPhotoButton(
-                title: 'Take a photo',
-                source: ImageSource.camera,
-              ),
-              SizedBox(height: 10),
-              _buildPickPhotoButton(
-                title: 'Pick from gallery',
-                source: ImageSource.gallery,
-              ),
-              SizedBox(height: 20),
-            ],
+      onWillPop: () async {
+        // Navigate back to the previous screen
+        Navigator.of(context).pop();
+        return true;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          leading: Image.asset('assets/icon/icon.png',height:20,width:20),
+          backgroundColor: Colors.green,
+          title: Text("Detect Canker"),
+        ),
+        body: SafeArea(
+          child: Container(
+            color: kBgColor,
+            padding: EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                _buildTitle(),
+                SizedBox(height: 20),
+                _buildPhotolView(),
+                SizedBox(height: 10),
+                _buildResultView(),
+                Spacer(),
+                _buildPickPhotoButton(
+                  title: 'Take a photo',
+                  source: ImageSource.camera,
+                ),
+                SizedBox(height: 10),
+                _buildPickPhotoButton(
+                  title: 'Pick from gallery',
+                  source: ImageSource.gallery,
+                ),
+                SizedBox(height: 20),
+              ],
+            ),
           ),
         ),
       ),
-    ),
     );
   }
+
 
   Widget _buildPhotolView() {
     return Stack(
@@ -134,26 +135,33 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
     required ImageSource source,
     required String title,
   }) {
-    return TextButton(
-      onPressed: () => _onPickPhoto(source),
-      child: Container(
-        width: 300,
-        height: 50,
-        color: kColorBrown,
-        child: Center(
-          child: Text(
-            title,
-            style: const TextStyle(
-              fontFamily: kButtonFont,
-              fontSize: 20.0,
-              fontWeight: FontWeight.w600,
-              color: kColorLightYellow,
+    return SizedBox(
+      width: 300,
+      height: 50,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(25), // Adjust the radius as needed
+        child: TextButton(
+          onPressed: () => _onPickPhoto(source),
+          style: TextButton.styleFrom(
+            backgroundColor:Colors.green,
+          ),
+          child: Center(
+            child: Text(
+              title,
+              style: const TextStyle(
+                fontFamily: kButtonFont,
+                fontSize: 20.0,
+                fontWeight: FontWeight.w600,
+                color:Colors.white,
+              ),
             ),
           ),
         ),
       ),
     );
   }
+
+
 
   void _setAnalyzing(bool flag) {
     setState(() {
