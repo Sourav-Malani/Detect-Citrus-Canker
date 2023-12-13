@@ -220,7 +220,7 @@ class _PostCardState extends State<PostCard> {
             width: double.infinity,
             padding: const EdgeInsets.only(top: 8),
             child: RichText(
-              text: TextSpan(style: TextStyle(color: Colors.white), children: [
+              text: TextSpan(style: TextStyle(color: Colors.black), children: [
                 TextSpan(
                     text: widget.snap["username"],
                     style: const TextStyle(fontWeight: FontWeight.bold)),
@@ -235,7 +235,7 @@ class _PostCardState extends State<PostCard> {
               padding: const EdgeInsets.symmetric(vertical: 4),
               alignment: Alignment.bottomLeft,
               child:  Text("view all ${commentLen}",
-                  style: TextStyle(fontSize: 16, color: secondaryColor)),
+                  style: TextStyle(fontSize: 16, color: Colors.grey)),
             ),
           ),
           Container(

@@ -1,3 +1,4 @@
+import 'package:canker_detect/utils/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:canker_detect/Community3/widgets/post_card.dart';
@@ -14,7 +15,7 @@ class FeedScreen extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             title: Text('Community'),
-            backgroundColor: Colors.green,
+            backgroundColor: mobileBackgroundColor,
             leading: IconButton(
               icon: Icon(Icons.arrow_back), // Add the back button icon here
               onPressed: () {

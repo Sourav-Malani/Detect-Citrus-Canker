@@ -1,3 +1,4 @@
+import 'package:canker_detect/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'dart:async';
@@ -69,7 +70,7 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
       appBar: AppBar(
         title: Text('HomePage_text'.tr(), style: TextStyle(fontSize: 20)),
         leading: Image.asset('assets/icon/icon.png',height:20,width:20),
-        backgroundColor: Colors.green,
+        backgroundColor: mobileBackgroundColor,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
