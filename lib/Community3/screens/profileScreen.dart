@@ -24,7 +24,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  var userData = {};
+
+  Map<String, dynamic> userData = {};
   int postLen = 0;
   int followers = 0;
   int following = 0;
@@ -34,10 +35,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    print("Current User UID: ${FirebaseAuth.instance.currentUser!.uid}");
+    print("Current User UD: ${FirebaseAuth.instance.currentUser!.uid}");
     super.initState();
     getData();
-    newUsernameController.text = userData["username"] ?? "";
+    newUsernameController.text = userData?["username"] ?? "";
   }
 
   getData() async {
@@ -47,24 +48,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
     try {
       var userSnap =
       await FirebaseFirestore.instance.collection("users").doc(widget.uid).get();
-      setState(() {
-        userData = userSnap.data()!;
-      });
+      if (userSnap.exists) {
+        setState(() {
+          userData = userSnap.data() ?? {}; // Update userData only if it's not null
+        });
 
-      var postSnap =
-      await FirebaseFirestore.instance.collection("post").where('uid', isEqualTo: widget.uid).get();
-      setState(() {
-        postLen = postSnap.docs.length;
-      });
-      setState(() {
-        followers = userSnap.data()!["followers"].length;
-      });
-      setState(() {
-        following = userSnap.data()!["following"].length;
-      });
-      setState(() {
-        isfollowing = userSnap.data()!["followers"].contains(FirebaseAuth.instance.currentUser!.uid);
-      });
+        // Other setState calls for postLen, followers, following, etc.
+      } else {
+        // Handle the case where userSnap doesn't exist
+      }
     } catch (e) {
       showSnackBar(e.toString(), context);
     }
@@ -110,7 +102,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context) {
         return AlertDialog(
           title: Text("Edit Profile"),
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: Colors.white,
           content: TextField(
             controller: newUsernameController,
             decoration: InputDecoration(
@@ -137,12 +129,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 }
               },
               child: Text("Save"),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.lightGreen,
+              ),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
               child: Text("Cancel"),
+              style: TextButton.styleFrom(
+                primary: Colors.lightGreen,
+              ),
             ),
           ],
         );
@@ -173,7 +171,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ? Center(child: CircularProgressIndicator())
         : Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).backgroundColor,
+        leading: Image.asset('assets/icon/icon.png',height:20,width:20),
+        backgroundColor: Colors.green,
         title: Text(
           userData["username"] != null ? userData["username"] : "username",
           style: TextStyle(color: Theme.of(context).textTheme.headline6!.color),
@@ -204,12 +203,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 Row(
                   children: [
-                    CircleAvatar(
-                      radius: 48,
-                      backgroundColor: Colors.grey,
-                      backgroundImage: NetworkImage(userData["photourl"]),
-                    ),
-                    Expanded(
+            CircleAvatar(
+              radius: 55,
+              backgroundColor: Colors.lightGreen,
+              child: CircleAvatar(
+                radius: 50,
+                backgroundColor: Colors.white,
+                child: CircleAvatar(
+                  radius: 48,
+                  backgroundImage: NetworkImage(
+                      userData["photourl"]),
+                ),
+              ),),
+              Expanded(
                       flex: 1,
                       child: Column(
                         children: [
@@ -224,8 +230,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           ),
                           FirebaseAuth.instance.currentUser!.uid == widget.uid
                               ? FollowButton(
-                            backgroundColor: Theme.of(context).backgroundColor,
-                            borderColor: Colors.grey,
+                            backgroundColor: Colors.lightGreen.shade400,
+                            borderColor: Colors.lightGreen.shade400,
                             text: "Sign Out",
                             //textColor: Theme.of(context).textTheme.headline6!.color,
                             textColor: Theme.of(context).textTheme.headline6?.color ?? Colors.black,
@@ -331,7 +337,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       builder: (context) {
         return AlertDialog(
           title: Text("Change Profile Picture"),
-          backgroundColor: Theme.of(context).backgroundColor,
+          backgroundColor: Colors.white,
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [

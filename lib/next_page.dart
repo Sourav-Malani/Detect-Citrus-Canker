@@ -45,7 +45,8 @@ class _NextPageState extends State<NextPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('HomePage_text'.tr(), style: TextStyle(fontSize: 20)),
-        backgroundColor: Color(0xff296e48),
+        leading: Image.asset('assets/icon/icon.png',height:20,width:20),
+        backgroundColor: Colors.green,
       ),
       drawer: Drawer(
         child: ListView(

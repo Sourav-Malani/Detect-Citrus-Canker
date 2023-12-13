@@ -13,8 +13,8 @@ class SwitchLanguageScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: Image.asset('assets/icon/icon.png',height:20,width:20),
         title: Text('Language Selection'),
+        leading: Image.asset('assets/icon/icon.png',height:20,width:20),
         backgroundColor: Colors.green,
       ),
       body: Container(

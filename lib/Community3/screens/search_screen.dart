@@ -24,6 +24,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: Image.asset('assets/icon/icon.png',height:20,width:20),
           backgroundColor: mobileBackgroundColor,
           title: TextFormField(
             controller: searchController,

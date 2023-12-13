@@ -67,7 +67,9 @@ class _ProductCardWidgetState extends State<ProductCardWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Homepage"),
+        title: Text('HomePage_text'.tr(), style: TextStyle(fontSize: 20)),
+        leading: Image.asset('assets/icon/icon.png',height:20,width:20),
+        backgroundColor: Colors.green,
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
