@@ -167,7 +167,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return isLoading
+    return WillPopScope(
+        onWillPop: () async {
+          // Navigate back to the home screen when the back button is pressed
+          Navigator.pushReplacementNamed(context, '/mobileScreenLayout');
+          return false; // Prevent default back button behavior
+        },
+
+    child: isLoading
         ? Center(child: CircularProgressIndicator())
         : Scaffold(
       appBar: AppBar(
@@ -328,6 +335,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ],
       ),
+    ),
     );
   }
 
