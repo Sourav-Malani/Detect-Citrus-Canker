@@ -4,7 +4,7 @@ const kMainFont = 'Roboto';
 const kButtonFont = 'Roboto';
 const kDisplayFont = 'SquadaOne';
 
-const kColorGreen = Color(0xFF395144);
+const kColorGreen = Color(0xFFFFFFFF);
 const kColorLightGreen = Color(0XFF4E6C50);
 const kColorBrown = Color(0XFFAA8B56);
 const kColorLightYellow = Color(0xFFF0EBCE);
