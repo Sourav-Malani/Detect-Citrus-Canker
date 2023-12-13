@@ -55,12 +55,7 @@ class _HomeState extends State<Home> {
             Scaffold(
               backgroundColor: Colors.transparent,
               appBar: AppBar(
-                leading: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/mobileScreenLayout');
-                  },
-                ),
+                leading: Image.asset('assets/icon/icon.png',height:20,width:20),
                 actions: <Widget>[
                   IconButton(
                     icon: Icon(
@@ -80,7 +75,7 @@ class _HomeState extends State<Home> {
 
                   titlePadding: EdgeInsets.all(14),
                   title: Text(
-                    '     Weather Page',
+                    '         Weather Page',
                     style: Theme.of(context).textTheme.headline5,
                   ),
                 ),

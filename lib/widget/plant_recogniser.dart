@@ -9,7 +9,7 @@ import '../styles.dart';
 import 'plant_photo_view.dart';
 
 const _labelsFileName = 'assets/labels_two.txt';
-const _modelFileName = 'model_unquant_one.tflite';
+const _modelFileName = 'model_unquant_two.tflite';
 
 class PlantRecogniser extends StatefulWidget {
   const PlantRecogniser({Key? key}) : super(key: key);
@@ -265,7 +265,9 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
         Text(title, style: kResultTextStyle),
         SizedBox(height: 20),
         if (_selectedImageFile != null &&
-            (_resultStatus == _ResultStatus.found && title != 'Fail To Recognize' && title != 'CitrusHealthy'))
+            (_resultStatus == _ResultStatus.found &&
+                title != 'Fail To Recognize' &&
+                title != 'CitrusHealthy'))
           GestureDetector(
             onTap: _navigateToRecommendationsPage,
             child: Container(
@@ -277,6 +279,8 @@ class _PlantRecogniserState extends State<PlantRecogniser> {
                   color: Colors.greenAccent.withOpacity(0.7),
                   width: 2,
                 ),
+                // Set the background color to green here
+                color: Colors.green,
               ),
               child: Center(child: Text('Treatment')),
             ),
